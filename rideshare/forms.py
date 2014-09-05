@@ -1,5 +1,6 @@
 from django import forms
 from django.forms import ModelForm, ValidationError
+from rideshare.models import User 
 
 class RegistrationForm(ModelForm):
     password1 = forms.CharField(max_length=30,widget=forms.PasswordInput(attrs={'placeholder': 'Verify Password'}))

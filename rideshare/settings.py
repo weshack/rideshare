@@ -19,6 +19,10 @@ TEMPLATE_DEBUG = True
 
 ALLOWED_HOSTS = []
 
+AUTH_USER_MODEL='rideshare.User'
+
+LOGIN_REDIRECT_URL='/'
+LOGIN_URL='/login'
 
 # Application definition
 
@@ -29,6 +33,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rideshare'
 )
 
 MIDDLEWARE_CLASSES = (
@@ -73,3 +78,12 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
 
 STATIC_URL = '/static/'
+
+EMAIL_BACKEND = 'mailer.backend.DbBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'no-reply@joomah.com'
+EMAIL_HOST_PASSWORD = 'rainbowunicornprincesshora'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+DEFAULT_FROM_EMAIL = 'no-reply@joomah.com'
+

@@ -5,18 +5,18 @@ from django.views.decorators.http import require_POST
 from django.core.exceptions import ObjectDoesNotExist
 from django.core.mail import send_mail, EmailMultiAlternatives
 from django.http import HttpResponse, Http404, HttpResponseForbidden
-from rideshare.forms import RegistratonForm
+from rideshare.forms import RegistrationForm
 import json
 
 def home(request):
    return render(request,'index.html')
 
-@login_required()
+@login_required
 def all_rides(request):
     return HttpResponse(json.dumps(Rides.objects.all()), content_type='application/json')
 
-@login_required()
-@require_POST()
+@login_required
+@require_POST
 def remove_from_ride(request, rId):
     ride = Rides.objects.get(id=rId)
     if ride.driver == request.user:
@@ -30,8 +30,8 @@ def remove_from_ride(request, rId):
     ride.save()
     return HttpResponse(json.dumps(ride), content_type='application/json')
 
-@login_required()
-@require_POST()
+@login_required
+@require_POST
 def add_to_ride(request, rId):
     ride = Rides.objects.get(id=rId)
     if request.POST.get('driver',False) and not ride.driver:
@@ -43,7 +43,7 @@ def add_to_ride(request, rId):
     return HttpResponse(json.dumps(ride),content_type='application/json')
 
 @login_required
-@require_POST()
+@require_POST
 def create_ride(request):
     start = Location.objects.create(state=request.POST['start_state'],city=request.POST['start_city'],address=request.POST['start_address'])
     end = Location.objects.create(state=request.POST['end_state'],city=request.POST['end_city'],address=request.POST['end_address'])
@@ -77,7 +77,7 @@ def logout(request):
     auth.logout(request)
     return HttpResponse("{'response':'ok'}",content_type='application/json')
 
-@require_POST()
+@require_POST
 def forgot_password(request):
     try:
         user = User.objects.get(email=request.POST.get('email'))
@@ -106,7 +106,7 @@ def forgot_password(request):
     msg.send()
     return HttpResponse("{ 'response': 'ok' }",content_type='application/json')
 
-@require_POST()
+@require_POST
 def recover(request, key):
     try:
         ja = AuthToken.objects.get(auth_code=key)
@@ -139,13 +139,13 @@ def verify(request, key):
 def get_comments(request,rId):
     return HttpResponse(json.dumps(Comment.objects.filter(ride__id=rId)),content_type='application/json')
 
-@login_required()
-@require_POST()
+@login_required
+@require_POST
 def add_comment(request,rId):
     Comment(ride=Ride.objects.get(rId),author=request.user,body=request.POST['body']).save()
     return HttpResponse("{'response': 'ok'}",content_type='application/json')
 
-@require_POST()
+@require_POST
 def create_user(request):
     form = RegistrationForm(request.POST)
     if form.is_valid():
@@ -154,8 +154,8 @@ def create_user(request):
     vars['response'] = form.errors
     return HttpResponse(json.dumps(vars),content_type='application/json')
 
-@require_POST()
-@login_required()
+@require_POST
+@login_required
 def modify_user(request):
     if request.POST.get('phone_number',False):
         request.user.phone_number = request.POST['phone_number']
