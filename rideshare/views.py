@@ -8,6 +8,9 @@ from django.http import HttpResponse, Http404, HttpResponseForbidden
 from rideshare.forms import RegistratonForm
 import json
 
+def home(request):
+   return render(request,'index.html')
+
 @login_required()
 def all_rides(request):
     return HttpResponse(json.dumps(Rides.objects.all()), content_type='application/json')
