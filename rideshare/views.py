@@ -109,7 +109,7 @@ def logout(request):
 
 def user_info(request):
     if request.user.is_authenticated():
-        return HttpResponse(json.dumps(request.user), content_type='application/json')
+        return HttpResponse(json.dumps(User.objects.get(id=request.user.id)), content_type='application/json')
     return HttpResponse("{'response': 'Not logged in.'}",content_type='application/json')
 
 @require_POST
