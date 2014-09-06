@@ -108,8 +108,9 @@ def logout(request):
     return HttpResponse("{'response':'ok'}",content_type='application/json')
 
 def user_info(request):
-    if user.is_authenticated():
-        return HttpResponse(json.dumps(request.user), content_type='application/json')
+    if request.user.is_authenticated():
+        user = { 'name': request.user.name, 'phone_number': request.user.phone_number, 'email': request.user.email, 'verified': request.user.verified, 'class_year': request.user.class_year }
+        return HttpResponse(json.dumps(user), content_type='application/json')
     return HttpResponse("{'response': 'Not logged in.'}",content_type='application/json')
 
 @require_POST
