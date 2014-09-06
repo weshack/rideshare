@@ -39,7 +39,7 @@
         <div class="" id="loginModal">
 
           <div class="modal-header" id="mainTitle">
-            <h3 id="mainTitle">Ride@Wes</h3>
+              <h3 id="mainTitle">Ride@Wes</h3>
           </div>
   
         <div class="modal-body">
@@ -191,6 +191,7 @@
             'phone_number' : $("#addphonenumber").val(),
             'class_year' : $("#addclassyear").val(),
           }).always(function(r) {
+            console.log(r);
             var resp = eval("(" + r.responseText + ")")
             if (resp.response != 'ok') {
               $("#createerror").text(resp.response).show();
