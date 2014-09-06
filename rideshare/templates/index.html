@@ -190,11 +190,9 @@
             'name' : $("#addname").val(),
             'phone_number' : $("#addphonenumber").val(),
             'class_year' : $("#addclassyear").val(),
-          }).always(function(r) {
-            console.log(r);
-            var resp = eval("(" + r.responseText + ")")
+          }).always(function(resp) {
             if (resp.response != 'ok') {
-              $("#createerror").text(resp.response).show();
+              $("#createerror").html(resp.response).show();
           }
         })
        });
