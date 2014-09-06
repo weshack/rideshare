@@ -126,7 +126,15 @@ def forgot_password(request):
                     "<div style='background: #888888; width: 200px; margin-left: auto; margin-right: auto; color: #FFFFFF; text-align: center; font-size: 3em;          padding: 3px; margin-top: 20px;'>\r\n"
                     "  <a href='http://rideatwes.weshack.com/recover/"+ new_token.auth_code+"' style='text-decoration: none; color: inherit;'>Recover</a>\r\n"
                     "</div>\r\n")
-    html_message = html_head + html_content + html_foot
+    html_message = "<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Strict//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd'>\r\n"
+             "<html xmlns='http://www.w3.org/1999/xhtml'>\r\n"
+             "<head>\r\n"
+             "<meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />\r\n"
+             "<link href='http://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>\r\n"
+             "</head>\r\n"
+             "<body style='background: #ECF0F1; font-size: 12px;'>\r\n"
+             "<div style='width: 60%; min-width: 400px; max-width: 800px; margin-left: auto; margin-right: auto; color: gray; margin-top: 40px;'>\r\n"
+    html_message += html_content + html_foot
     message="To recover your account please follow the link to http://rideatwes.weshack.com/recover/" + new_token.auth_code
     message+="\nIf you did not request account recovery you can safely ignore this message."
     message+="\nThanks,"+"\n"+"The Ride@Wes Team."
