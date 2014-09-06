@@ -38,7 +38,7 @@ def cmp(city, to_wes, time):
        if to_wes and r.start.city == city:   i += 10000
        if not to_wes and r.end.city == city: i += 10000 
        i -= abs(r.leave_time_start - time).seconds / 1800
-       return -int(i)
+       return -i
    return compare_rides
     
 
@@ -52,8 +52,8 @@ def search(request):
     if driver: query = Ride.objects.filter(driver__isnull=True)
     else: query = Ride.objects.filter(driver__isnull=False)
     
-    if to_wes: query = query.filter(start__state=state)
-    else: query = query.filter(end__state=state)
+    if to_wes: query = query.filter(start__state__name=state)
+    else: query = query.filter(end__state__name=state)
     
     query = sorted(query,key=compare_rides(city,to_wes,time))
     
