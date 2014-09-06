@@ -40,7 +40,11 @@
         <div class="" id="loginModal">
 
           <div class="modal-header" id="mainTitle">
+<<<<<<< HEAD
             <h3 id="mainTitle">RiDE@WES</h3>
+=======
+              <h3 id="mainTitle">Ride@Wes</h3>
+>>>>>>> 3f710636f80e74a9f194c5e0f5abb51f35363ef7
           </div>
   
         <div class="modal-body">
@@ -54,6 +58,9 @@
               <div class="container login">
                 <div class="row">
                   <div class="center span4 well">
+                    <div id='loginerror' class="alert alert-box" style="display: none; ">
+                      <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    </div>
                     <legend>Sign In</legend>
                       <input type="text" id="username" class="span4" name="username" placeholder="Email" />
                       <input type="password" id="password" class="span4" name="password" placeholder="Password  " />
@@ -166,10 +173,14 @@
          $.post("/login/",
           { 'username': $("#username").val(),
             'password': $("#password").val()
-          }).error(
-            function(r) {
-              console.log(r);
-            })
+          }).always(function(r) {
+            var resp = eval("(" + r.responseText + ")")
+            if (resp.response != 'ok') {
+              $("#loginerror").text(resp.response).show();
+            } else {
+              $("#loginerror").text(resp.response).hide();
+            }
+          })
         });
 
        $("#forgot").click(function() {
@@ -179,6 +190,8 @@
             var resp = eval("(" + r.responseText + ")")
             if (resp.response != 'ok') {
               $("#forgoterror").text(resp.response).show();
+            } else {
+              $("#forgoterror").text(resp.response).hide();
             }
           })
        });
@@ -191,11 +204,12 @@
             'name' : $("#addname").val(),
             'phone_number' : $("#addphonenumber").val(),
             'class_year' : $("#addclassyear").val(),
-          }).always(function(r) {
-            var resp = eval("(" + r.responseText + ")")
+          }).always(function(resp) {
             if (resp.response != 'ok') {
-              $("#createerror").text(resp.response).show();
-          }
+              $("#createerror").html(resp.response).show();
+          } else {
+              $("#createerror").html(resp.response).hide();
+            }
         })
        });
     </script>

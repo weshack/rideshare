@@ -1,5 +1,15 @@
+//fonts
+@font-face {
+    font-family: Dodger;
+    src: url(../fonts/Dodger/Dodgev2.ttf);
+}
+    
+
 #mainTitle {
     color: #ff2a2a;
     text-align: center;
-    text-size: 3em;
+    padding-top: 35px;
+    padding-bottom: 15px;
+    font-size: 2em;
+    font-family: Exo;
 }

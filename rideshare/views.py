@@ -34,6 +34,7 @@ def remove_from_ride(request, rId):
 @login_required
 @require_POST
 def add_to_ride(request, rId):
+    if not request.user.verified: return HttpResponse("{ 'response': 'You must verify your account to join a ride.' }", content_type='application/json')
     ride = Rides.objects.get(id=rId)
     if request.POST.get('driver',False) and not ride.driver:
         ride.driver = request.user
@@ -46,6 +47,7 @@ def add_to_ride(request, rId):
 @login_required
 @require_POST
 def create_ride(request):
+    if not request.user.verified: return HttpResponse("{ 'response': 'You must verify your account to create a ride.' }", content_type='application/json')
     start = Location.objects.create(state=request.POST['start_state'],city=request.POST['start_city'],address=request.POST['start_address'])
     end = Location.objects.create(state=request.POST['end_state'],city=request.POST['end_city'],address=request.POST['end_address'])
     ride = Ride.objects.create(owner=request.user,start=start,end=end)
@@ -57,7 +59,6 @@ def create_ride(request):
        ride.passengers.add(request.user)
     ride.leave_time_start = request.POST['leave_time_start']
     ride.leave_time_end = request.POST['leave_time_end']
-    ride.start
     ride.save()
     return HttpResponse(json.dumps(ride),content_type='application/json')
 
@@ -143,6 +144,8 @@ def get_comments(request,rId):
 @login_required
 @require_POST
 def add_comment(request,rId):
+    ride = Ride.objects.get(rId)
+    if len(ride.passengers.filter(id=request.user.id)) == 0 and ride.driver != request.user: return HttpResponse("{ 'response': 'You must belong to a ride to post comments.' }", content_type='application/json')
     Comment(ride=Ride.objects.get(rId),author=request.user,body=request.POST['body']).save()
     return HttpResponse("{'response': 'ok'}",content_type='application/json')
 
@@ -152,7 +155,8 @@ def create_user(request):
     if form.is_valid():
         form.save()
         return HttpResponse("{'response':'ok'}",content_type='application/json')
-    vars['response'] = form.errors
+    vars = {}
+    vars['response'] = str(form.errors)
     return HttpResponse(json.dumps(vars),content_type='application/json')
 
 @require_POST
