@@ -55,7 +55,7 @@ def search(request):
     if to_wes: query = query.filter(start__state__name=state)
     else: query = query.filter(end__state__name=state)
     
-    query = sorted(query,key=compare_rides(city,to_wes,time))
+    query = sorted(query,key=cmp(city,to_wes,time))
     
     return HttpResponse(json.dumps(query), content_type='application/json')
 
