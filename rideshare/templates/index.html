@@ -4,9 +4,9 @@
     <meta http-equiv="Content-Type" content="text/html/Javascript/python; charset=utf-8" />
     <title>Ride@Wes</title>
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-      
+
+    <!-- Stylesheet -->
     <link rel="stylesheet" href="/static/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="/static/css/index.css" />
     <link rel="stylesheet" href="/static/css/bootstrap-responsive.min.css" />
   </head>
 
@@ -42,11 +42,10 @@
           </div>
   
         <div class="modal-body">
-          <div class="well">
-            <ul class="nav nav-tabs">
-              <li class="active"><a href="#logtab" data-toggle="tab">Login</a></li>
-              <li><a href="#createtab" data-toggle="tab">Create Account</a><li>
-            </ul>
+          <ul class="nav nav-tabs">
+            <li class="active"><a href="#logtab" data-toggle="tab">Login</a></li>
+            <li><a href="#createtab" data-toggle="tab">Create Account</a><li>
+          </ul>
   
           <div id="tabs" class="tab-content">
             <div class="tab-pane active in" id="logtab">
@@ -86,7 +85,10 @@
             
         </div>
       </section>
+<<<<<<< HEAD
 
+=======
+>>>>>>> 7637d7565d1dd6e8f18b665714be139fef674cce
   
     <!-- Forgot Password Box -->
     <div id="forgotbox" class="modal hide fade in" style="display: none; ">
@@ -105,7 +107,7 @@
       </div>
     </div>
 
-    <!-- Forgot Password Error -->
+    <!-- Error Box -->
     <div id='error' class="alert alert-warning">
       <a href="#" class="close" data-dismiss="alert">&times;</a>
     </div>
@@ -175,7 +177,7 @@
         $.post("/forgot-password/",
           { 'email': $("#username").val(),
           }).always(function(r) {
-            var resp = eval("(" + r.responseText + ")");
+            var resp = eval("(" + r.responseText + ")")
             if (resp.response != 'ok') {
               $("#error").text(resp.response);
             }
