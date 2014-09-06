@@ -23,12 +23,15 @@
       <div id="wrap"> <!-- wrap all content for fixed header/footer -->
           
       <div class="modal-header" id="mainTitle">
-        <h3 id="mainTitle">RiDE@WES</h3>
+        <img src="../static/img/license-plate.jpg" >
+          <!-- http://acme.com/licensemaker/licensemaker.cgi?state=Connecticut&text=Wes+Ride&plate=1987&r=1520451124 -->
+          <br><br>
+        <p>THIS IS <img src="../static/img/y-sign.jpg" id="ysign"></p>
       </div>
           
       <div id="content">
       
-      <div id="signin">
+      <div id="signin" class="loadSearch">
   
       <!-- Main Container -->
       <section>
@@ -146,12 +149,14 @@
             <input type="radio" name="ridetype" value="passenger" />&nbsp; Passenger <br><br>
         
           <p>Driving 
-            <input type="radio" name="direction" value="toWes" />&nbsp; from Wesleyan to
-            <input type="radio" name="direction" value="fromWes" />&nbsp; to Wesleyan from
+            <select name="direction" class="searchFont">
+              <option value="toWes">from Wesleyan to</option>
+              <option value="fromWes">to Wesleyan from</option>
+            </select>
            </p>
         
-          <input type="text" id="city" name="city" placeholder="City" />
-            <select id="state" name="state" class="form-control">
+          <input type="text" id="city" name="city" placeholder="City" class="searchFont" />
+            <select id="state" name="state" class="form-control" class="searchFont">
                 <option value="AL">AL</option>
                 <option value="AK">AK</option>
                 <option value="AZ">AZ</option>
@@ -216,7 +221,7 @@
     <!-- SEARCH END -->
           
 
-    <div id="suggestions" class="otherpages">
+    <div id="suggestions" class="otherpages loadSearch">
         <div id="createNew">
     
         
@@ -227,9 +232,8 @@
     </div> <!-- end main content -->
           
     <div id="footer">
-        <p class="text-center muted">Created by Ted Kim, Max Dietz, Matthew Stein.&nbsp;&nbsp;&nbsp;
-            <a id="contactLink" href="#contactbox" data-toggle="modal"><i class="icon-envelope icon-black"></i> Contact Us</a>
-        </p>
+        <p class="text-center muted">Created by Ted Kim, Max Dietz, Matthew Stein. </p>
+        <p><a id="contactLink" href="#contactbox" data-toggle="modal"><i class="icon-envelope icon-black"></i> Contact Us</a></p>
     </div>
           
     </div> <!-- end wrap -->

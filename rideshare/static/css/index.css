@@ -1,3 +1,8 @@
+@font-face {
+    font-family: "License";
+    src: url("../fonts/LicensePlate.ttf") format("truetype");
+}
+
 html, body {
     height: 100%;
     margin: 0;
@@ -17,14 +22,19 @@ html, body {
     position: absolute;
     bottom: 0;
     left: 0;
+    text-align: center;
 }
 #mainTitle {
     color: #ff2a2a;
     text-align: center;
     padding-top: 15px;
-    padding-bottom: 15px;
+    padding-bottom: 5px;
     font-size: 2em;
-    font-family: Exo;
+    font-family: "License";
+}
+#ysign {
+    height:50px;
+    width: auto;
 }
 .otherpages {
     /* hide all but login page at start */
@@ -42,4 +52,12 @@ html, body {
     width: 100%;
     margin: 0 auto;
     text-align: center;
+}
+#search {
+    margin-top: 15px;
+    text-align: center;
+}
+#search, .searchFont {
+    font-size: 16px;
+    font-family: "License";
 }
