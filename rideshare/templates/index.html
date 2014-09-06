@@ -19,9 +19,14 @@
 
   <body>{% csrf_token %}
       
+      
+      <div id="wrap"> <!-- wrap all content for fixed header/footer -->
+          
       <div class="modal-header" id="mainTitle">
         <h3 id="mainTitle">RiDE@WES</h3>
       </div>
+          
+      <div id="content">
       
       <div id="signin">
   
@@ -36,9 +41,9 @@
   
           <div id="tabs" class="tab-content">
             <div class="tab-pane active in" id="logtab">
-              <div class="container login">
+              <div class="container login" id="logContainer">
                 <div class="row">
-                  <div class="center span4 well">
+                  <div class="center offset4 span4 well">
                     <div id='loginerror' class="alert alert-box" style="display: none; ">
                       <button type="button" class="close" data-dismiss="alert">&times;</button>
                     </div>
@@ -50,10 +55,11 @@
                   </div>
                 </div>
               </div>
-              <a href="#contactbox" data-toggle="modal"><i class="icon-envelope icon-black"></i> Contact Us</a>
+              
             </div>
               
             <div class="tab-pane fade" id="createtab">
+              <div class="center offset4 span4 well">
               <div id="createerror" class="alert alert-box" style="display: none; ">
               <button type="button" class="close" data-dismiss="alert">&times;</button>
               </div>
@@ -80,10 +86,9 @@
                   <button id="create" class="btn btn-primary">Create Account</button>
                 </div>
             </div>
+            </div>
           </div>
          </div>
-
-        <p class="text-center muted">Created by Ted Kim, Max Dietz, Matthew Stein.</p>
             
         </div>
       </section>
@@ -137,17 +142,15 @@
           
     <div id="search" class="otherpages">
           I am a
-            <input type="radio" value="driver" />Driver
-            <input type="radio" value="passenger" />Passenger <br><br>
+            <input type="radio" name="ridetype" value="driver" />&nbsp; Driver
+            <input type="radio" name="ridetype" value="passenger" />&nbsp; Passenger <br><br>
         
           <p>Driving 
-            <input type="radio" value="toWes" />from Wesleyan to
-            <input type="radio" value="fromWes" /> to Wesleyan from
+            <input type="radio" name="direction" value="toWes" />&nbsp; from Wesleyan to
+            <input type="radio" name="direction" value="fromWes" />&nbsp; to Wesleyan from
            </p>
         
           <input type="text" id="city" name="city" placeholder="City" />
-          <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-            <label>State:</label>
             <select id="state" name="state" class="form-control">
                 <option value="AL">AL</option>
                 <option value="AK">AK</option>
@@ -201,8 +204,6 @@
                 <option value="WI">WI</option>
                 <option value="WY">WY</option>
             </select>
-        </div>
-        <label>Are you a giving or looking for a ride?</label>
         <br>
         <p>Leaving at 
             <input type="time" name="departTime" />
@@ -217,11 +218,21 @@
 
     <div id="suggestions" class="otherpages">
         <div id="createNew">
-        
+    
         
         </div>
     </div>
     <!-- SUGGESTIONS END -->
+    
+    </div> <!-- end main content -->
+          
+    <div id="footer">
+        <p class="text-center muted">Created by Ted Kim, Max Dietz, Matthew Stein.&nbsp;&nbsp;&nbsp;
+            <a id="contactLink" href="#contactbox" data-toggle="modal"><i class="icon-envelope icon-black"></i> Contact Us</a>
+        </p>
+    </div>
+          
+    </div> <!-- end wrap -->
           
 
     <!-- Javascript -->
@@ -255,7 +266,7 @@
             'password': $("#password").val(),
           }).always(function(r) {
             var resp = eval("(" + r.responseText + ")")
-            if (resp.response != 'ok') {
+            if (resp.response.toString() != "ok") {
               $("#loginerror").text(resp.response).show();
             } else {
               $("#loginerror").hide();
@@ -269,10 +280,9 @@
         $.post("/forgot-password/",
           { 'email' : $("#forgotemail").val(),
         }).always(function(r) {
+          var resp = eval("(" + r.responseText + ")");
           $("#forgoterror").hide();
-                  console.log(r);
-          var resp = eval("(" + r.responseText + ")")
-          if (resp.reponse != 'ok') {
+          if (resp.response.toString() != "ok") {
             $("#forgoterror").text(resp.response).show();
           }
         })
@@ -294,7 +304,7 @@
             $("#password1Errors").hide();
             $("#phoneNumberErrors").hide();
             $("#classYearErrors").hide();
-            if (resp.response != 'ok') {
+            if (resp.response && resp.response.toString() != 'ok') {
               if (resp.response.__all__)
                 $("#createerror").text(resp.response.__all__[0]).show();
               if (resp.response.email)
@@ -309,6 +319,20 @@
                 $("#phoneNumberErrors").text(resp.response.phone_number[0]).show();
               if (resp.response.class_year)
                 $("#classYearErrors").text(resp.response.class_year[0]).show();
+          } else {
+              $.post("/login/",
+            { 'username': $("#addemail").val(),
+              'password': $("#addpassword").val(),
+            }).always(function(r) {
+              var resp = eval("(" + r.responseText + ")")
+              if (resp.response.toString() != "ok") {
+                $("#loginerror").text(resp.response).show();
+              } else {
+                $("#loginerror").hide();
+                $("#signin").hide();
+                $("#search").show();
+              }
+            })
           }
         })
        });
