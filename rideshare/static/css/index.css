@@ -2,6 +2,10 @@
     font-family: "License";
     src: url("../fonts/LicensePlate.ttf") format("truetype");
 }
+@font-face {
+    font-family: "Railway";
+    src: url("../fonts/railway/Railway.otf");
+}
 
 html, body {
     height: 100%;
@@ -30,7 +34,7 @@ html, body {
     padding-top: 15px;
     padding-bottom: 5px;
     font-size: 2em;
-    font-family: "License";
+    font-family: "Railway";
 }
 #ysign {
     height:50px;
@@ -59,5 +63,5 @@ html, body {
 }
 #search, .searchFont {
     font-size: 16px;
-    font-family: "License";
+    font-family: "Railway";
 }
