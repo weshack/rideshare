@@ -225,6 +225,7 @@
           
 
     <div id="suggestions" class="otherpages loadSearch">
+        <p>No results found</p>
         <div id="createNew">
     
         
@@ -369,6 +370,9 @@
         console.log("/search/?to_wes=" + direction +"&driver=" + driver + "&city=" + $("#city").val() +"&state=" + $("#state").val() + "&time=" + time)
         console.log(r);
         })
+        
+        $("#search").hide();
+        $("#suggestions").show();
       });
 
       $(function() {
