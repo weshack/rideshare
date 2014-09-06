@@ -1,11 +1,20 @@
 #mainTitle {
     color: #ff2a2a;
     text-align: center;
-    padding-top: 35px;
+    padding-top: 15px;
     padding-bottom: 15px;
     font-size: 2em;
     font-family: Exo;
 }
+#loginModal {
+    width: 500px;
+}
+#logtab {
+    width: 100%;
+    margin: 0 auto;
+    text-align: center;
+}
 .otherpages {
+    /* hide all but login page at start */
     display: none;
 }
