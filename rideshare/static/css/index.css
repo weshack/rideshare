@@ -11,10 +11,8 @@ html, body {
     height: 100%;
     margin: 0;
     padding: 0;
-/*
-    background-image: url("../img/ct_map.jpg");
+/*    background-image: url("../img/ct_map.jpg");*/
     background-size: cover;
-*/
 }
 #wrap {
     min-height: 100%;
@@ -31,6 +29,10 @@ html, body {
     bottom: 0;
     left: 0;
     text-align: center;
+    background-color: rgba(208, 205, 205, 0.68);
+    box-shadow: 0 2px 10px black;
+    padding: 5px;
+    margin-bottom: 10px;
 }
 #mainTitle {
     color: #ff2a2a;
@@ -39,6 +41,14 @@ html, body {
     padding-bottom: 5px;
     font-size: 2em;
     font-family: "Railway";
+}
+#titlePlate {
+    box-shadow: 0 0 10px blue;
+}
+#subtitle {
+    background-color: rgba(255, 255, 255, 0.47);
+    width: 180px;
+    box-shadow: 0 2px 10px black;
     
 }
 #ysign {
