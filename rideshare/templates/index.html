@@ -224,10 +224,22 @@
           
 
     <div id="suggestions" class="otherpages loadSearch">
-        <p>No results found</p>
-        <div id="createNew">
-    
+        <div id="accordion">
+        <h3>Results</h3>
+        <div id="results">
+                    <p>No results found</p>
+        </div>
         
+        <h3>Create a New Ride</h3>
+        <div id="createNew">
+            <p>Create a new ride for [existing search]</p>
+        </div>
+        
+        <h3>View My Rides</h3>
+        <div id="myrides">
+        </div>
+        
+        <h3>Search Again!</h3>
         </div>
     </div>
     <!-- SUGGESTIONS END -->
@@ -376,6 +388,9 @@
 
       $(function() {
         $("#datepicker").datepicker();
+      });
+      $(function() {
+        $( "#accordion" ).accordion();
       });
     </script>
   </body>
