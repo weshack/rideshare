@@ -1,6 +1,5 @@
-hello {
-    color: rgba(214, 89, 89, 0.33);
-}
-#forgotbox {
-    color: black;
+#mainTitle {
+    color: #ff2a2a;
+    text-align: center;
+    text-size: 3em;
 }
