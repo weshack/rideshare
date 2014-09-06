@@ -6,7 +6,7 @@ class RegistrationForm(ModelForm):
     password1 = forms.CharField(max_length=30,widget=forms.PasswordInput(attrs={'placeholder': 'Verify Password'}))
     class Meta:
         model = User
-        fields = ('name','email','phone_number','password',)
+        fields = ('name','email','phone_number','password','class_year',)
     def clean(self):
         cleaned_data = super(RegistrationForm, self).clean()
         password = cleaned_data.get('password')

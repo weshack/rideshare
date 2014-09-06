@@ -7,6 +7,7 @@
 
     <!-- Stylesheet -->
     <link rel="stylesheet" href="/static/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/static/css/index.css" />
     <link rel="stylesheet" href="/static/css/bootstrap-responsive.min.css" />
   </head>
 
@@ -25,7 +26,7 @@
             <ul class="nav">
               <li><a href="#forgotbox" data-toggle="modal"><i class="icon-user icon-white"></i>Forgot Password</a  ></li>
               <li class="divider-vertical"></li>
-              <li><a href="#contact" data-toggle="modal"><i class="icon-envelope icon-white"></i>Contact Us</a  ></li>
+              <li><a href="#contactbox" data-toggle="modal"><i class="icon-envelope icon-white"></i>Contact Us</a  ></li>
               <li class="divider-vertical"></li>
             </ul>
           </div>
@@ -36,16 +37,16 @@
       <!-- Main Container -->
       <section>
         <div class="" id="loginModal">
-          <div class="modal-header">
-            <h3>Ride@Wes</h3>
+
+          <div class="modal-header" id="mainTitle">
+            <h3 id="mainTitle">Ride@Wes</h3>
           </div>
   
         <div class="modal-body">
-          <div class="well">
-            <ul class="nav nav-tabs">
-              <li class="active"><a href="#logtab" data-toggle="tab">Login</a></li>
-              <li><a href="#createtab" data-toggle="tab">Create Account</a><li>
-            </ul>
+          <ul class="nav nav-tabs">
+            <li class="active"><a href="#logtab" data-toggle="tab">Login</a></li>
+            <li><a href="#createtab" data-toggle="tab">Create Account</a><li>
+          </ul>
   
           <div id="tabs" class="tab-content">
             <div class="tab-pane active in" id="logtab">
@@ -62,30 +63,38 @@
             </div>
 
             <div class="tab-pane fade" id="createtab">
+              <div id="createerror" class="alert alert-box" style="display: none; ">
+              <button type="button" class="close" data-dismiss="alert">&times;</button>
+              </div>
                 <label>Email</label>
-                <input type="text" value="" class="span4" placeholder="ted@wesleyan.edu" />
+                <input id="addemail" type="text" value="" class="span4" placeholder="ted@wesleyan.edu" />
                 <label>Password</label>
-                <input type="password" value="" class="span4" placeholder="Password (at least 8 characters)" />
+                <input id="addpassword" type="password" value="" class="span4" placeholder="Password (at least 8 characters)" />
                 <label>Confirm Password</label>
-                <input type="password" value="" class="span4" placeholder="Password" />
+                <input id="addconfirmpassword" type="password" value="" class="span4" placeholder="Password" />
                 <label>Name</label>
-                <input type="text" value="" class="span4" placeholder="Name" />
+                <input id="addname" type="text" value="" class="span4" placeholder="Name" />
                 <label>Phone Number</label>
-                <input type="text" value="" class="span4" placeholder="Phone Number" />
+                <input id="addphonenumber" type="text" value="" class="span4" placeholder="Phone Number" />
                 <label>Class Year </label>
-                <input type="text" value="" class="span4" placeholder="Optional" />
+                <input id="addclassyear" type="text" value="" class="span4" placeholder="Class Year" />
   
                 <div>
                   <button id="create" class="btn btn-primary">Create Account</button>
                 </div>
             </div>
           </div>
+        </div>
         <p class="text-center muted">Created by Ted Kim, Max Dietz, Matthew Stein.</p>
+            
+        </div>
       </section>
-    </div>
   
     <!-- Forgot Password Box -->
     <div id="forgotbox" class="modal hide fade in" style="display: none; ">
+      <div id='forgoterror' class="alert alert-box" style="display: none; ">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+      </div>
       <div class="modal-header">
         <a class="close" data-dismiss="modal">×</a>
         <h3>Forgot Password</h3>
@@ -110,7 +119,7 @@
       <div class="modal-body">
       <p>Reach out to us</p>
           <div class="controls control-row">
-            <input id="name" name="name" type="text" class="span3" placeholder="Name" />
+            <input name="name" type="text" class="span3" placeholder="Name" />
           </div>
           <div class="controls control-row">
             <input name="username" type="text" class="span3" placeholder="username" />
@@ -122,6 +131,7 @@
       <div>
         <a href="#" class="btn btn-primary">Submit</a>
       </div>
+    </div>
 
 
     <!-- Javascript -->
@@ -164,19 +174,28 @@
        $("#forgot").click(function() {
         $.post("/forgot-password/",
           { 'email': $("#username").val(),
-          }).error(
-            function(r) {
-              console.log(r);
-            })
+          }).always(function(r) {
+            var resp = eval("(" + r.responseText + ")")
+            if (resp.response != 'ok') {
+              $("#forgoterror").text(resp.response).show();
+            }
+          })
        });
 
        $("#create").click(function() {
         $.post("/users/add/",
-          { 'username': $("#username").val(),
-          }).error(
-            function(r) {
-              console.log(r);
-            })
+          { 'email': $("#addemail").val(),
+            'password' : $("#addpassword").val(),
+            'password1' : $("#addconfirmpassword").val(),
+            'name' : $("#addname").val(),
+            'phone_number' : $("#addphonenumber").val(),
+            'class_year' : $("#addclassyear").val(),
+          }).always(function(r) {
+            var resp = eval("(" + r.responseText + ")")
+            if (resp.response != 'ok') {
+              $("#createerror").text(resp.response).show();
+          }
+        })
        });
     </script>
   </body>
