@@ -87,10 +87,11 @@
             
         </div>
       </section>
-  
+    <!-- Main Container End -->
+
     <!-- Forgot Password Box -->
     <div id="forgotbox" class="modal hide fade in" style="display: none; ">
-      <div id='forgoterror' class="alert alert-box" style="display: none; ">
+      <div id="forgoterror" class="alert alert-box" style="display: none; ">
         <button type="button" class="close" data-dismiss="alert">&times;</button>
       </div>
       <div class="modal-header">
@@ -100,7 +101,7 @@
       <div class="modal-body">
       <p>Enter your email to reset your password</p>
           <div class="controls control-row">
-            <input name="username" type="text" class="span3" placeholder="Email" />
+            <input id="forgotemail" name="forgotemail" type="text" class="span3" placeholder="Email" />
          </div>
       </div>
       <div>
@@ -145,8 +146,9 @@
            </p>
         
           <input type="text" id="city" name="city" placeholder="City" />
-<!--          <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">-->
-            <select name="state" class="form-control">
+          <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+            <label>State:</label>
+            <select id="state" name="state" class="form-control">
                 <option value="AL">AL</option>
                 <option value="AK">AK</option>
                 <option value="AZ">AZ</option>
@@ -199,7 +201,8 @@
                 <option value="WI">WI</option>
                 <option value="WY">WY</option>
             </select>
-<!--        </div>-->
+        </div>
+        <label>Are you a giving or looking for a ride?</label>
         <br>
         <p>Leaving at 
             <input type="time" name="departTime" />
@@ -249,7 +252,7 @@
        $("#login").click(function() {
          $.post("/login/",
           { 'username': $("#username").val(),
-            'password': $("#password").val()
+            'password': $("#password").val(),
           }).always(function(r) {
             var resp = eval("(" + r.responseText + ")")
             if (resp.response != 'ok') {
@@ -264,15 +267,15 @@
 
        $("#forgot").click(function() {
         $.post("/forgot-password/",
-          { 'email': $("#username").val(),
-          }).always(function(r) {
-            var resp = eval("(" + r.responseText + ")")
-            if (resp.response != 'ok') {
-              $("#forgoterror").text(resp.response).show();
-            } else {
-              $("#forgoterror").hide();
-            }
-          })
+          { 'email' : $("#forgotemail").val(),
+        }).always(function(r) {
+          $("#forgoterror").hide();
+                  console.log(r);
+          var resp = eval("(" + r.responseText + ")")
+          if (resp.reponse != 'ok') {
+            $("#forgoterror").text(resp.response).show();
+          }
+        })
        });
 
        $("#create").click(function() {
