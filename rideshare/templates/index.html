@@ -153,7 +153,7 @@
             </select>
           </p>
         
-          <input type="text" id="city" name="city" placeholder="City" />
+          <input type="text" id="city" name="city" placeholder="City" class="required" />
             <select id="state" name="state" class="form-control">
                 <option value="AL">AL</option>
                 <option value="AK">AK</option>
@@ -209,9 +209,9 @@
             </select>
         <br>
         <p>Leaving at 
-            <input type="time" name="departTime" />
+            <input type="time" name="departTime" class="required" />
             on 
-            <input type="text" id="datepicker" name="departDate" />
+            <input type="text" id="datepicker" name="departDate" class="required" />
         </p>
         <br>
         <button type="submit" id="searchRides" name="searchRides" >Search for a Ride!</button>
@@ -356,7 +356,7 @@
         console.log("/search/?to_wes=" + direction +"&driver=" + driver + "&city=" + $("#city").val() +"&state=" + $("#state").val() + "&time=");
         })
       });
-        
+
       $(function() {
         $("#datepicker").datepicker();
       });
