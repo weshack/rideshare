@@ -269,7 +269,7 @@
             'password': $("#password").val(),
           }).always(function(r) {
             var resp = eval("(" + r.responseText + ")")
-            if (resp.response != 'ok') {
+            if (resp.response.toString() != "ok") {
               $("#loginerror").text(resp.response).show();
             } else {
               $("#loginerror").hide();
@@ -283,10 +283,9 @@
         $.post("/forgot-password/",
           { 'email' : $("#forgotemail").val(),
         }).always(function(r) {
-          $("#forgoterror").hide();
           var resp = eval("(" + r.responseText + ")");
-          console.log(resp);
-          if (resp.reponse != "ok") {
+          $("#forgoterror").hide();
+          if (resp.response.toString() != "ok") {
             $("#forgoterror").text(resp.response).show();
           }
         })
@@ -308,7 +307,7 @@
             $("#password1Errors").hide();
             $("#phoneNumberErrors").hide();
             $("#classYearErrors").hide();
-            if (resp.response && resp.response != 'ok') {
+            if (resp.response && resp.response.toString() != 'ok') {
               if (resp.response.__all__)
                 $("#createerror").text(resp.response.__all__[0]).show();
               if (resp.response.email)
