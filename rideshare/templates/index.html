@@ -63,18 +63,21 @@
             </div>
 
             <div class="tab-pane fade" id="createtab">
+              <div id="forgoterror" class="alert alert-box" style="display: none; ">
+              <button type="button" class="close" data-dismiss="alert">&times;</button>
+              </div>
                 <label>Email</label>
-                <input type="text" value="" class="span4" placeholder="ted@wesleyan.edu" />
+                <input id="addemail" type="text" value="" class="span4" placeholder="ted@wesleyan.edu" />
                 <label>Password</label>
-                <input type="password" value="" class="span4" placeholder="Password (at least 8 characters)" />
+                <input id="addpassword" type="password" value="" class="span4" placeholder="Password (at least 8 characters)" />
                 <label>Confirm Password</label>
-                <input type="password" value="" class="span4" placeholder="Password" />
+                <input id="addconfirmpassword" type="password" value="" class="span4" placeholder="Password" />
                 <label>Name</label>
-                <input type="text" value="" class="span4" placeholder="Name" />
+                <input id="addname" type="text" value="" class="span4" placeholder="Name" />
                 <label>Phone Number</label>
-                <input type="text" value="" class="span4" placeholder="Phone Number" />
+                <input id="addphonenumber" type="text" value="" class="span4" placeholder="Phone Number" />
                 <label>Class Year </label>
-                <input type="text" value="" class="span4" placeholder="Optional" />
+                <input id="addclassyear" type="text" value="" class="span4" placeholder="Class Year" />
   
                 <div>
                   <button id="create" class="btn btn-primary">Create Account</button>
@@ -116,7 +119,7 @@
       <div class="modal-body">
       <p>Reach out to us</p>
           <div class="controls control-row">
-            <input id="name" name="name" type="text" class="span3" placeholder="Name" />
+            <input name="name" type="text" class="span3" placeholder="Name" />
           </div>
           <div class="controls control-row">
             <input name="username" type="text" class="span3" placeholder="username" />
@@ -181,11 +184,18 @@
 
        $("#create").click(function() {
         $.post("/users/add/",
-          { 'username': $("#username").val(),
-          }).error(
-            function(r) {
-              console.log(r);
-            })
+          { 'email': $("#addemail").val(),
+            'password' : $("#addpassword").val(),
+            'password1' : $("#addconfirmpassword").val(),
+            'name' : $("#addname").val(),
+            'phone_number' : $("#addphonenumber").val(),
+            'class_year' : $("#addclassyear").val(),
+          }).always(function(r) {
+            var resp = eval("(" + r.responseText + ")")
+            if (resp.response != 'ok') {
+              $("#createerror").text(resp.response).show();
+          }
+        })
        });
     </script>
   </body>
