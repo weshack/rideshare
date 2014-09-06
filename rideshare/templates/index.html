@@ -322,6 +322,20 @@
                 $("#phoneNumberErrors").text(resp.response.phone_number[0]).show();
               if (resp.response.class_year)
                 $("#classYearErrors").text(resp.response.class_year[0]).show();
+          } else {
+              $.post("/login/",
+            { 'username': $("#addemail").val(),
+              'password': $("#addpassword").val(),
+            }).always(function(r) {
+              var resp = eval("(" + r.responseText + ")")
+              if (resp.response.toString() != "ok") {
+                $("#loginerror").text(resp.response).show();
+              } else {
+                $("#loginerror").hide();
+                $("#signin").hide();
+                $("#search").show();
+              }
+            })
           }
         })
        });
