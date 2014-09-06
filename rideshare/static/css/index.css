@@ -11,6 +11,10 @@ html, body {
     height: 100%;
     margin: 0;
     padding: 0;
+/*
+    background-image: url("../img/ct_map.jpg");
+    background-size: cover;
+*/
 }
 #wrap {
     min-height: 100%;
@@ -35,6 +39,7 @@ html, body {
     padding-bottom: 5px;
     font-size: 2em;
     font-family: "Railway";
+    
 }
 #ysign {
     height:50px;
