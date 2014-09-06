@@ -6,7 +6,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.core.mail import send_mail, EmailMultiAlternatives
 from django.http import HttpResponse, Http404, HttpResponseForbidden
 from rideshare.forms import RegistrationForm
-from rideshare.models import User, AuthToken
+from rideshare.models import User, AuthToken, Ride
 from django.db.models import Q
 import json
 
