@@ -269,9 +269,9 @@
           { 'email' : $("#forgotemail").val(),
         }).always(function(r) {
           $("#forgoterror").hide();
-                  console.log(r);
           var resp = eval("(" + r.responseText + ")")
-          if (resp.reponse != 'ok') {
+          console.log(resp);
+          if (resp.reponse != "ok") {
             $("#forgoterror").text(resp.response).show();
           }
         })
@@ -293,7 +293,7 @@
             $("#password1Errors").hide();
             $("#phoneNumberErrors").hide();
             $("#classYearErrors").hide();
-            if (resp.response != 'ok') {
+            if (resp.response && resp.response != 'ok') {
               if (resp.response.__all__)
                 $("#createerror").text(resp.response.__all__[0]).show();
               if (resp.response.email)
