@@ -101,6 +101,11 @@
       </div>
     </div>
 
+    <!-- Forgot Password Error -->
+    <div id='error' class="alert alert-warning">
+      <a href="#" class="close" data-dismiss="alert">&times;</a>
+    </div>
+
     <!-- Contact Us Box -->
     <div id="contactbox" class="modal hide fade in" style="display: none; ">
       <div class="modal-header">
@@ -122,6 +127,7 @@
       <div>
         <a href="#" class="btn btn-primary">Submit</a>
       </div>
+    </div>
 
 
     <!-- Javascript -->
@@ -164,10 +170,12 @@
        $("#forgot").click(function() {
         $.post("/forgot-password/",
           { 'email': $("#username").val(),
-          }).error(
-            function(r) {
-              console.log(r);
-            })
+          }).always(function(r) {
+            var resp = eval("(" + r.responseText + ")");
+            if (resp.response != 'ok') {
+              $("#error").text(resp.response);
+            }
+          })
        });
 
        $("#create").click(function() {
