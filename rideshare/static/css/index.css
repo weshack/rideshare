@@ -6,6 +6,6 @@
     font-size: 2em;
     font-family: Exo;
 }
-#search {
-    background-color: #ff00ff;
+.otherpages {
+    display: none;
 }
