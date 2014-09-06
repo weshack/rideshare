@@ -49,8 +49,8 @@ def search(request):
     city = request.GET.get('city')
     to_wes = request.GET.get('to_wes')
     
-    if driver: query = Ride.objects.filter(driver__is_null=True)
-    else: query = Ride.objects.filter(driver__is_null=False)
+    if driver: query = Ride.objects.filter(driver__isnull=True)
+    else: query = Ride.objects.filter(driver__isnull=False)
     
     if to_wes: query = query.filter(start__state=state)
     else: query = query.filter(end__state=state)
