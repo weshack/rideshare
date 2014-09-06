@@ -203,7 +203,7 @@
             if (resp.response != 'ok') {
               $("#createerror").html(resp.response).show();
           } else {
-              $("#createerror").text(resp.response).hide();
+              $("#createerror").html(resp.response).hide();
             }
         })
        });
