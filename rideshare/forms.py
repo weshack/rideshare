@@ -7,11 +7,6 @@ class RegistrationForm(ModelForm):
     class Meta:
         model = User
         fields = ('name','email','phone_number','password',)
-    def __init__(self, *args, **kwargs):
-        super(RegistrationForm, self).__init__(*args, **kwargs)
-        self.fields['first_name'].widget.attrs = { 'placeholder': 'First Name' }
-        self.fields['last_name'].widget.attrs = { 'placeholder': 'Last Name' }
-        self.fields['email'].widget.attrs = { 'placeholder': 'Email Address'}
     def clean(self):
         cleaned_data = super(RegistrationForm, self).clean()
         password = cleaned_data.get('password')
