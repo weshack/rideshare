@@ -157,15 +157,15 @@
             </select>
           </p>
         
-          <input type="text" id="city" name="city" placeholder="City" class="required" />
-            <select id="state" name="state" class="form-control">
+          <input type="text" id="city" name="city" placeholder="Middletown" value="Middletown" required />
+            <select id="state" name="state" class="form-control" >
                 <option value="AL">AL</option>
                 <option value="AK">AK</option>
                 <option value="AZ">AZ</option>
                 <option value="AR">AR</option>
                 <option value="CA">CA</option>
                 <option value="CO">CO</option>
-                <option value="CT">CT</option>
+                <option selected value="CT">CT</option>
                 <option value="DE">DE</option>
                 <option value="DC">DC</option>
                 <option value="FL">FL</option>
@@ -213,9 +213,9 @@
             </select>
         <br>
         <p>Leaving at 
-            <input type="time" name="departTime" class="required" />
+            <input type="time" id="time" name="departTime" value="12:00" />
             on 
-            <input type="text" id="datepicker" name="departDate" class="required" />
+            <input type="text" id="datepicker" name="departDate" />
         </p>
         <br>
         <button type="submit" id="searchRides" name="searchRides" >Search for a Ride!</button>
@@ -342,14 +342,19 @@
           }
         })
        });
+
+      $("#datepicker").val((new Date()).toLocaleDateString());
+
       $.getJSON("/users/info",function(r){
         if (!r.response) { $("#loginerror").hide();
                 $("#signin").hide();
                 $("#search").show();
          }});
+        
       $("#searchRides").click(function() {
         var driver = "True";
         var direction = "True";
+        var time = $("datepicker").val() + $("#time").val();
 
         if ($("#isDriver").val() != "driver") {
           driver = "False";
@@ -359,8 +364,8 @@
           direction = "False";
         }
 
-        $.getJSON("/search/?to_wes=" + direction +"&driver=" + driver + "&city=" + $("#city").val() +"&state=" + $("#state").val() + "&time=").always(function(r) {
-        console.log("/search/?to_wes=" + direction +"&driver=" + driver + "&city=" + $("#city").val() +"&state=" + $("#state").val() + "&time=");
+        $.getJSON("/search/?to_wes=" + direction +"&driver=" + driver + "&city=" + $("#city").val() +"&state=" + $("#state").val() + "&time=" + time).always(function(r) {
+        console.log("/search/?to_wes=" + direction +"&driver=" + driver + "&city=" + $("#city").val() +"&state=" + $("#state").val() + "&time=" + time);
         })
       });
 
