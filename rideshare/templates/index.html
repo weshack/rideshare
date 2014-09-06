@@ -302,6 +302,13 @@
           }
         })
        });
+
+      $("#searchRides").click(function() {
+        $.getJSON("/search/?to_wes=True&driver=True&city=&state=&time=")
+        .always(function(resp) {
+        console.log(resp);
+        })
+      });
     </script>
   </body>
 </html>
