@@ -85,6 +85,9 @@
   
     <!-- Forgot Password Box -->
     <div id="forgotbox" class="modal hide fade in" style="display: none; ">
+    <div id='forgoterror' class="alert alert-box" style="display: none; ">
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+    </div>
       <div class="modal-header">
         <a class="close" data-dismiss="modal">×</a>
         <h3>Forgot Password</h3>
@@ -98,11 +101,6 @@
       <div>
         <a id="forgot" class="btn btn-primary">Submit</a>
       </div>
-    </div>
-
-    <!-- Error Box -->
-    <div id='error' class="alert alert-warning">
-      <a href="#" class="close" data-dismiss="alert">&times;</a>
     </div>
 
     <!-- Contact Us Box -->
@@ -172,7 +170,7 @@
           }).always(function(r) {
             var resp = eval("(" + r.responseText + ")")
             if (resp.response != 'ok') {
-              $("#error").text(resp.response);
+              $("#forgoterror").text(resp.response);
             }
           })
        });
