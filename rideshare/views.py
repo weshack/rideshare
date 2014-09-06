@@ -38,7 +38,7 @@ def cmp(city, to_wes, time):
        if to_wes and r.start.city == city:   i += 10000
        if not to_wes and r.end.city == city: i += 10000 
        i -= abs(r.leave_time_start - time).seconds / 1800
-       return -i
+       return -int(i)
    return compare_rides
     
 
