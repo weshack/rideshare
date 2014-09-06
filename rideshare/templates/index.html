@@ -354,7 +354,7 @@
       $("#searchRides").click(function() {
         var driver = "True";
         var direction = "True";
-        var time = $("datepicker").val() + $("#time").val();
+        var time = ($("#datepicker").datepicker( "getDate" ).toLocaleDateString()) + $("#time").val();
 
         if ($("#isDriver").val() != "driver") {
           driver = "False";
@@ -365,7 +365,8 @@
         }
 
         $.getJSON("/search/?to_wes=" + direction +"&driver=" + driver + "&city=" + $("#city").val() +"&state=" + $("#state").val() + "&time=" + time).always(function(r) {
-        console.log("/search/?to_wes=" + direction +"&driver=" + driver + "&city=" + $("#city").val() +"&state=" + $("#state").val() + "&time=" + time);
+        console.log("/search/?to_wes=" + direction +"&driver=" + driver + "&city=" + $("#city").val() +"&state=" + $("#state").val() + "&time=" + time)
+        console.log(r);
         })
       });
 
