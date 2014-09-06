@@ -16,17 +16,24 @@
 
   <body>{% csrf_token %}
       
+      <div class="modal-header" id="mainTitle">
+          <h3 id="mainTitle">RiDE@WES</h3>
+      </div>
+      
       <div id="signin">
   
       <!-- Main Container -->
       <section>
         <div class="" id="loginModal">
+<<<<<<< HEAD
 
           <div class="modal-header" id="mainTitle"> 
 
             <h3 id="mainTitle">RiDE@WES</h3>
 
           </div>
+=======
+>>>>>>> f08ff6d0df49ebb6338280dfb718e12b49cd007d
   
         <div class="modal-body">
           <ul class="nav nav-tabs">
@@ -193,7 +200,8 @@
         </div>
         <br>
         <label>When are you leaving?</label>
-        <input type="time" name="depart" />
+        <input type="time" name="departTime" />
+        <input type="date" name="departDate" />
         <br>
         <label>Are you a giving or looking for a ride?</label>
         <div class="btn-group">
@@ -208,7 +216,10 @@
           
 
     <div id="suggestions">
-          
+        <div id="createNew">
+        
+        
+        </div>
     </div>
     <!-- SUGGESTIONS END -->
           
