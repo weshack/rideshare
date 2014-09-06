@@ -19,9 +19,14 @@
 
   <body>{% csrf_token %}
       
+      
+      <div id="wrap"> <!-- wrap all content for fixed header/footer -->
+          
       <div class="modal-header" id="mainTitle">
         <h3 id="mainTitle">RiDE@WES</h3>
       </div>
+          
+      <div id="content">
       
       <div id="signin">
   
@@ -36,9 +41,9 @@
   
           <div id="tabs" class="tab-content">
             <div class="tab-pane active in" id="logtab">
-              <div class="container login">
+              <div class="container login" id="logContainer">
                 <div class="row">
-                  <div class="center span4 well">
+                  <div class="center offset4 span4 well">
                     <div id='loginerror' class="alert alert-box" style="display: none; ">
                       <button type="button" class="close" data-dismiss="alert">&times;</button>
                     </div>
@@ -50,10 +55,11 @@
                   </div>
                 </div>
               </div>
-              <a href="#contactbox" data-toggle="modal"><i class="icon-envelope icon-black"></i> Contact Us</a>
+              
             </div>
               
             <div class="tab-pane fade" id="createtab">
+              <div class="center offset4 span4 well">
               <div id="createerror" class="alert alert-box" style="display: none; ">
               <button type="button" class="close" data-dismiss="alert">&times;</button>
               </div>
@@ -80,10 +86,9 @@
                   <button id="create" class="btn btn-primary">Create Account</button>
                 </div>
             </div>
+            </div>
           </div>
          </div>
-
-        <p class="text-center muted">Created by Ted Kim, Max Dietz, Matthew Stein.</p>
             
         </div>
       </section>
@@ -216,11 +221,21 @@
 
     <div id="suggestions" class="otherpages">
         <div id="createNew">
-        
+    
         
         </div>
     </div>
     <!-- SUGGESTIONS END -->
+    
+    </div> <!-- end main content -->
+          
+    <div id="footer">
+        <p class="text-center muted">Created by Ted Kim, Max Dietz, Matthew Stein.&nbsp;&nbsp;&nbsp;
+            <a id="contactLink" href="#contactbox" data-toggle="modal"><i class="icon-envelope icon-black"></i> Contact Us</a>
+        </p>
+    </div>
+          
+    </div> <!-- end wrap -->
           
 
     <!-- Javascript -->
@@ -269,7 +284,7 @@
           { 'email' : $("#forgotemail").val(),
         }).always(function(r) {
           $("#forgoterror").hide();
-          var resp = eval("(" + r.responseText + ")")
+          var resp = eval("(" + r.responseText + ")");
           console.log(resp);
           if (resp.reponse != "ok") {
             $("#forgoterror").text(resp.response).show();
