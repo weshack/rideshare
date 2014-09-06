@@ -7,6 +7,7 @@ from django.core.mail import send_mail, EmailMultiAlternatives
 from django.http import HttpResponse, Http404, HttpResponseForbidden
 from rideshare.forms import RegistrationForm
 from rideshare.models import User, AuthToken
+from django.db.models import Q
 import json
 
 def home(request):
@@ -14,12 +15,12 @@ def home(request):
 
 @login_required
 def all_rides(request):
-    return HttpResponse(json.dumps(Rides.objects.all()), content_type='application/json')
+    return HttpResponse(json.dumps(Ride.objects.all()), content_type='application/json')
 
 @login_required
 @require_POST
 def remove_from_ride(request, rId):
-    ride = Rides.objects.get(id=rId)
+    ride = Ride.objects.get(id=rId)
     if ride.driver == request.user:
         ride.driver = None
     else:
@@ -31,11 +32,38 @@ def remove_from_ride(request, rId):
     ride.save()
     return HttpResponse(json.dumps(ride), content_type='application/json')
 
+def cmp(city, to_wes, time):
+   def compare_rides(r):
+       i = 0
+       if to_wes and r.start.city == city:   i += 10000
+       if not to_wes and r.end.city == city: i += 10000 
+       i -= abs(r.leave_time_start - time).seconds / 1800
+       return -i
+   return compare_rides
+    
+
+def search(request):
+    driver = request.GET.get('driver',False)
+    time = request.GET.get('time')
+    state = request.GET.get('state')
+    city = request.GET.get('city')
+    to_wes = request.GET.get('to_wes')
+    
+    if driver: query = Ride.objects.filter(driver__is_null=True)
+    else: query = Ride.objects.filter(driver__is_null=False)
+    
+    if to_wes: query = query.filter(start__state=state)
+    else: query = query.filter(end__state=state)
+    
+    query = sorted(query,key=compare_rides(city,to_wes,time))
+    
+    return HttpResponse(json.dumps(query), content_type='application/json')
+
 @login_required
 @require_POST
 def add_to_ride(request, rId):
     if not request.user.verified: return HttpResponse("{ 'response': 'You must verify your account to join a ride.' }", content_type='application/json')
-    ride = Rides.objects.get(id=rId)
+    ride = Ride.objects.get(id=rId)
     if request.POST.get('driver',False) and not ride.driver:
         ride.driver = request.user
         ride.max_passengers = request.POST.get('max_passengers',1)
