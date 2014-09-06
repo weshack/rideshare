@@ -40,11 +40,9 @@
         <div class="" id="loginModal">
 
           <div class="modal-header" id="mainTitle">
-<<<<<<< HEAD
+
             <h3 id="mainTitle">RiDE@WES</h3>
-=======
-              <h3 id="mainTitle">Ride@Wes</h3>
->>>>>>> 3f710636f80e74a9f194c5e0f5abb51f35363ef7
+
           </div>
   
         <div class="modal-body">
@@ -75,16 +73,22 @@
               <button type="button" class="close" data-dismiss="alert">&times;</button>
               </div>
                 <label>Email</label>
+                <div class='alert' style='display:none;' id='emailErrors'></div>
                 <input id="addemail" type="text" value="" class="span4" placeholder="ted@wesleyan.edu" />
                 <label>Password</label>
+                <div class='alert' style='display:none;' id='passwordErrors'></div>
                 <input id="addpassword" type="password" value="" class="span4" placeholder="Password (at least 8 characters)" />
                 <label>Confirm Password</label>
+                <div class='alert' style='display:none;' id='password1Errors'></div>
                 <input id="addconfirmpassword" type="password" value="" class="span4" placeholder="Password" />
                 <label>Name</label>
+                <div class='alert' style='display:none;' id='nameErrors'></div>
                 <input id="addname" type="text" value="" class="span4" placeholder="Name" />
                 <label>Phone Number</label>
+                <div class='alert' style='display:none;' id='phoneNumberErrors'></div>
                 <input id="addphonenumber" type="text" value="" class="span4" placeholder="Phone Number" />
                 <label>Class Year </label>
+                <div class='alert' style='display:none;' id='classYearErrors'></div>
                 <input id="addclassyear" type="text" value="" class="span4" placeholder="Class Year" />
   
                 <div>
@@ -178,7 +182,7 @@
             if (resp.response != 'ok') {
               $("#loginerror").text(resp.response).show();
             } else {
-              $("#loginerror").text(resp.response).hide();
+              $("#loginerror").hide();
             }
           })
         });
@@ -191,7 +195,7 @@
             if (resp.response != 'ok') {
               $("#forgoterror").text(resp.response).show();
             } else {
-              $("#forgoterror").text(resp.response).hide();
+              $("#forgoterror").hide();
             }
           })
        });
@@ -205,11 +209,29 @@
             'phone_number' : $("#addphonenumber").val(),
             'class_year' : $("#addclassyear").val(),
           }).always(function(resp) {
+            $("#createerror").hide();
+            $("#emailErrors").hide();
+            $("#nameErrors").hide();
+            $("#passwordErrors").hide();
+            $("#password1Errors").hide();
+            $("#phoneNumberErrors").hide();
+            $("#classYearErrors").hide();
             if (resp.response != 'ok') {
-              $("#createerror").html(resp.response).show();
-          } else {
-              $("#createerror").html(resp.response).hide();
-            }
+              if (resp.response.__all__)
+                $("#createerror").text(resp.response.__all__[0]).show();
+              if (resp.response.email)
+                $("#emailErrors").text(resp.response.email[0]).show();
+              if (resp.response.name)
+                $("#nameErrors").text(resp.response.name[0]).show();
+              if (resp.response.password)
+                $("#passwordErrors").text(resp.response.password[0]).show();
+              if (resp.response.password1)
+                $("#password1Errors").text(resp.response.password1[0]).show();
+              if (resp.response.phone_number)
+                $("#phoneNumberErrors").text(resp.response.phone_number[0]).show();
+              if (resp.response.class_year)
+                $("#classYearErrors").text(resp.response.class_year[0]).show();
+          }
         })
        });
     </script>

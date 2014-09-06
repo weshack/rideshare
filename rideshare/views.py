@@ -156,7 +156,7 @@ def create_user(request):
         form.save()
         return HttpResponse("{'response':'ok'}",content_type='application/json')
     vars = {}
-    vars['response'] = str(form.errors)
+    vars['response'] = form.errors
     return HttpResponse(json.dumps(vars),content_type='application/json')
 
 @require_POST
