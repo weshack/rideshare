@@ -23,10 +23,10 @@
       <div id="wrap"> <!-- wrap all content for fixed header/footer -->
           
       <div class="modal-header" id="mainTitle">
-        <img src="../static/img/license-plate.jpg" >
+        <img src="../static/img/license-plate.jpg" id="titlePlate">
           <!-- http://acme.com/licensemaker/licensemaker.cgi?state=Connecticut&text=Wes+Ride&plate=1987&r=1520451124 -->
           <br><br>
-        <p>THIS IS <img src="../static/img/y-sign.jpg" id="ysign"></p>
+        <p id="subtitle">THIS IS <img src="../static/img/y-sign.jpg" id="ysign"></p>
       </div>
           
       <div id="content">
@@ -158,6 +158,7 @@
             </select>
           </p>
         
+          <input type="text" id="address" name="address" value="46 Wyllys Ave." />
           <input type="text" id="city" name="city" placeholder="Middletown" value="Middletown" required />
             <select id="state" name="state" class="form-control" >
                 <option value="AL">AL</option>
@@ -219,8 +220,8 @@
             <input type="text" id="datepicker" name="departDate" />
         </p>
         <br>
-        <button type="submit" id="searchRides" name="searchRides" >Search for a Ride!</button>
-        <button type="submit" id="createRide" name="createRide" >Create a Ride!</button>
+        <button type="submit" id="searchRides" name="searchRides" >Search for a Ride</button>
+        <button type="submit" id="createRide" name="createRide" >Create a Ride</button>
     </div>
     <!-- SEARCH END -->
           
@@ -245,13 +246,14 @@
         
         <h3>Search Again!</h3>
         </div>
+        
     </div>
     <!-- SUGGESTIONS END -->
     
     </div> <!-- end main content -->
           
     <div id="footer">
-        <p class="text-center muted">Created by Ted Kim, Max Dietz, Matthew Stein. </p>
+        <p class="text-center">Created by Ted Kim, Max Dietz, Matthew Stein. </p>
         <p><a id="contactLink" href="#contactbox" data-toggle="modal"><i class="icon-envelope icon-black"></i> Contact Us</a></p>
     </div>
           
@@ -391,6 +393,23 @@
         $("#search").hide();
         $("#suggestions").show();
       });
+
+      $("#createRide").click(function() {
+        var start_state = "CT"
+        var start_city = "Middletown"
+        var end_state = "CT"
+        var end_city = "Middletown"
+        var address = ""
+        if ($("#direction").val() == "toWes") {
+          start_state = $("#state").val();
+          start_city = $("#city").val();
+        } else {
+          end_state = $("#state").val();
+          end_city = $("#city").val();
+        ]
+
+        $.post("/rides/create/")
+      })
 
       $(function() {
         $("#datepicker").datepicker();
