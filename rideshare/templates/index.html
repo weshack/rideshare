@@ -16,39 +16,15 @@
 
   <body>{% csrf_token %}
       
-      <div id="signin">
-      <!-- Navigation Bar -->
-      <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="navbar-inner">
-          <div class="container">
-            <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-            </a>
-  
-          <div class="nav-collapse collapse pull-right">
-            <ul class="nav">
-              <li><a href="#forgotbox" data-toggle="modal"><i class="icon-user icon-white"></i>Forgot Password</a  ></li>
-              <li class="divider-vertical"></li>
-              <li><a href="#contactbox" data-toggle="modal"><i class="icon-envelope icon-white"></i>Contact Us</a  ></li>
-              <li class="divider-vertical"></li>
-            </ul>
-          </div>
-          </div>
-        </div>
+      <div class="modal-header" id="mainTitle">
+        <h3 id="mainTitle">RiDE@WES</h3>
       </div>
+      
+      <div id="signin">
   
       <!-- Main Container -->
       <section>
         <div class="" id="loginModal">
-
-          <div class="modal-header" id="mainTitle">
-
-            <h3 id="mainTitle">RiDE@WES</h3>
-
-          </div>
-  
         <div class="modal-body">
           <ul class="nav nav-tabs">
             <li class="active"><a href="#logtab" data-toggle="tab">Login</a></li>
@@ -67,8 +43,9 @@
                       <input type="text" id="username" class="span4" name="username" placeholder="Email" />
                       <input type="password" id="password" class="span4" name="password" placeholder="Password  " />
                     <button id="login" type="submit" name="submit" class="btn btn-primary btn-block">Sign in</button>
+                    <a href="#forgotbox" data-toggle="modal"><i></i>Forgot Password?</a  >
                   </div>
-                </div>
+                </div><a href="#contactbox" data-toggle="modal"><i class="icon-envelope icon-black"></i> Contact Us</a  >
               </div>
             </div>
 
@@ -100,7 +77,8 @@
                 </div>
             </div>
           </div>
-        </div>
+         </div>
+
         <p class="text-center muted">Created by Ted Kim, Max Dietz, Matthew Stein.</p>
             
         </div>
@@ -212,7 +190,8 @@
         </div>
         <br>
         <label>When are you leaving?</label>
-        <input type="time" name="depart" />
+        <input type="time" name="departTime" />
+        <input type="date" name="departDate" />
         <br>
         <label>Are you a giving or looking for a ride?</label>
         <div class="btn-group">
@@ -227,7 +206,10 @@
           
 
     <div id="suggestions">
-          
+        <div id="createNew">
+        
+        
+        </div>
     </div>
     <!-- SUGGESTIONS END -->
           
