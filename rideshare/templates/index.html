@@ -172,6 +172,8 @@
             var resp = eval("(" + r.responseText + ")")
             if (resp.response != 'ok') {
               $("#loginerror").text(resp.response).show();
+            } else {
+              $("#loginerror").text(resp.response).hide();
             }
           })
         });
@@ -183,6 +185,8 @@
             var resp = eval("(" + r.responseText + ")")
             if (resp.response != 'ok') {
               $("#forgoterror").text(resp.response).show();
+            } else {
+              $("#forgoterror").text(resp.response).hide();
             }
           })
        });
@@ -198,7 +202,9 @@
           }).always(function(resp) {
             if (resp.response != 'ok') {
               $("#createerror").html(resp.response).show();
-          }
+          } else {
+              $("#createerror").text(resp.response).hide();
+            }
         })
        });
     </script>
