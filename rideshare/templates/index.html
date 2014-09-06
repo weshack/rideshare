@@ -44,7 +44,7 @@
           <div class="well">
             <ul class="nav nav-tabs">
               <li class="active"><a href="#logtab" data-toggle="tab">Login</a></li>
-              <li><a href="#create" data-toggle="tab">Create Account</a><li>
+              <li><a href="#createtab" data-toggle="tab">Create Account</a><li>
             </ul>
   
           <div id="tabs" class="tab-content">
@@ -53,7 +53,7 @@
                 <div class="row">
                   <div class="center span4 well">
                     <legend>Sign In</legend>
-                      <input type="text" id="username" class="span4" name="username" placeholder="username" />
+                      <input type="text" id="username" class="span4" name="username" placeholder="Email" />
                       <input type="password" id="password" class="span4" name="password" placeholder="Password  " />
                     <button id="login" type="submit" name="submit" class="btn btn-primary btn-block">Sign in</button>
                   </div>
@@ -61,20 +61,22 @@
               </div>
             </div>
 
-            <div class="tab-pane fade" id="create">
-                <label>username</label>
-                <input type="text" value="" class="span4" placeholder="username" />
-                <label>First Name</label>
-                <input type="text" value="" class="span4" placeholder="First Name" />
-                <label>Last Name</label>
-                <input type="text" value="" class="span4" placeholder="Last Name" />
+            <div class="tab-pane fade" id="createtab">
+                <label>Email</label>
+                <input type="text" value="" class="span4" placeholder="ted@wesleyan.edu" />
+                <label>Password</label>
+                <input type="password" value="" class="span4" placeholder="Password (at least 8 characters)" />
+                <label>Confirm Password</label>
+                <input type="password" value="" class="span4" placeholder="Password" />
+                <label>Name</label>
+                <input type="text" value="" class="span4" placeholder="Name" />
                 <label>Phone Number</label>
                 <input type="text" value="" class="span4" placeholder="Phone Number" />
                 <label>Class Year </label>
                 <input type="text" value="" class="span4" placeholder="Optional" />
   
                 <div>
-                  <button class="btn btn-primary">Create Account</button>
+                  <button id="create" class="btn btn-primary">Create Account</button>
                 </div>
             </div>
           </div>
@@ -89,9 +91,9 @@
         <h3>Forgot Password</h3>
       </div>
       <div class="modal-body">
-      <p>Enter your username to reset your password</p>
+      <p>Enter your email to reset your password</p>
           <div class="controls control-row">
-            <input name="username" type="text" class="span3" placeholder="username" />
+            <input name="username" type="text" class="span3" placeholder="Email" />
          </div>
       </div>
       <div>
@@ -161,8 +163,17 @@
 
        $("#forgot").click(function() {
         $.post("/forgot-password/",
+          { 'email': $("#username").val(),
+          }).error(
+            function(r) {
+              console.log(r);
+            })
+       });
+
+       $("#create").click(function() {
+        $.post("/users/add/",
           { 'username': $("#username").val(),
-          }).always(
+          }).error(
             function(r) {
               console.log(r);
             })
