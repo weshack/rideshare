@@ -219,8 +219,8 @@
             <input type="text" id="datepicker" name="departDate" />
         </p>
         <br>
-        <button type="submit" id="searchRides" name="searchRides" >Search for a Ride!</button>
-        <button type="submit" id="createRide" name="createRide" >Create a Ride!</button>
+        <button type="submit" id="searchRides" name="searchRides" >Search for a Ride</button>
+        <button type="submit" id="createRide" name="createRide" >Create a Ride</button>
     </div>
     <!-- SEARCH END -->
           
@@ -387,6 +387,23 @@
         $("#search").hide();
         $("#suggestions").show();
       });
+
+      $("#createRide").click(function() {
+        var start_state = "CT"
+        var start_city = "Middletown"
+        var end_state = "CT"
+        var end_city = "Middletown"
+        var address = ""
+        if ($("#direction").val() == "toWes") {
+          start_state = $("#state").val();
+          start_city = $("#city").val();
+        } else {
+          end_state = $("#state").val();
+          end_city = $("#city").val();
+        ]
+
+        $.post("/rides/create/")
+      })
 
       $(function() {
         $("#datepicker").datepicker();
