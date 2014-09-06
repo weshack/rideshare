@@ -18,6 +18,10 @@ def all_rides(request):
     return HttpResponse(json.dumps(Ride.objects.all()), content_type='application/json')
 
 @login_required
+def my_rides(request):
+    return HttpResponse(json.dumps(Ride.objects.filter(Q(driver=request.user) | Q(passengers__in=[request.user]) | Q(owner=request.user))), content_type='application/json')
+
+@login_required
 @require_POST
 def remove_from_ride(request, rId):
     ride = Ride.objects.get(id=rId)
