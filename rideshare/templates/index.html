@@ -142,13 +142,16 @@
           
     <div id="search" class="otherpages">
           I am a
-            <input type="radio" name="ridetype" value="driver" />&nbsp; Driver
-            <input type="radio" name="ridetype" value="passenger" />&nbsp; Passenger <br><br>
-        
+          <select id='isDriver'>
+            <option value='driver'>Driver</option>
+            <option value='passenger'>Passenger</option>
+          </select>
           <p>Driving 
-            <input type="radio" name="direction" value="toWes" />&nbsp; from Wesleyan to
-            <input type="radio" name="direction" value="fromWes" />&nbsp; to Wesleyan from
-           </p>
+            <select id='direction'>
+              <option value='fromWes'>from Wesleyan to</option>
+              <option value='toWes'>to Wesleyan from</option>
+            </select>
+          </p>
         
           <input type="text" id="city" name="city" placeholder="City" />
             <select id="state" name="state" class="form-control">
@@ -338,9 +341,19 @@
        });
 
       $("#searchRides").click(function() {
-        $.getJSON("/search/?to_wes=" + $() +"&driver=True&city=&state=&time=")
-        .always(function(resp) {
-        console.log(resp);
+        var driver = "True";
+        var direction = "True";
+
+        if ($("#isDriver").val() != "driver") {
+          driver = "False";
+        }
+
+        if ($("#direction").val() != "toWes") {
+          direction = "False";
+        }
+
+        $.getJSON("/search/?to_wes=" + direction +"&driver=" + driver + "&city=" + $("#city").val() +"&state=" + $("#state").val() + "&time=").always(function(r) {
+        console.log("/search/?to_wes=" + direction +"&driver=" + driver + "&city=" + $("#city").val() +"&state=" + $("#state").val() + "&time=");
         })
       });
         
