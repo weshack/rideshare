@@ -230,7 +230,9 @@
         <div id="accordion">
         <h3>Results</h3>
         <div id="results">
+          <ul id='searchresults'>
                     <p>No results found</p>
+          </ul>
         </div>
         
         <h3>Create a New Ride</h3>
@@ -242,8 +244,9 @@
         <div id="myrides">
         </div>
         
-        <h3>Search Again!</h3>
         </div>
+        
+        <button id="searchAgain">Search Again!</button>
         
     </div>
     <!-- SUGGESTIONS END -->
@@ -382,9 +385,11 @@
         }
 
         $.getJSON("/search/?to_wes=" + direction +"&driver=" + driver + "&city=" + $("#city").val() +"&state=" + $("#state").val() + "&time=" + time).always(function(r) {
-        console.log("/search/?to_wes=" + direction +"&driver=" + driver + "&city=" + $("#city").val() +"&state=" + $("#state").val() + "&time=" + time)
-        console.log(r);
-        })
+          console.log(r);
+          for (var i = 0; i<r.length;i++){
+            $("#searchresults").appendChild("<li>Ride from " + r[i].start + " to " + r[i].end + " at " + r[i].time + " with " + (r[i].max_passengers - r[i].passengers.length) + " free seats.</li>");
+          }
+        });
         
         $("#search").hide();
         $("#suggestions").show();
@@ -423,6 +428,13 @@
            console.log(resp.response);
          }
         })
+
+        $.post("/rides/create/")
+      }});
+        
+      $("#searchAgain").click(function() {
+          $("#suggestions").hide();
+          $("#search").show();
       });
 
       $(function() {
