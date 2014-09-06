@@ -2,7 +2,7 @@ from django.conf.urls import patterns, include, url
 import rideshare.views
 
 urlpatterns = patterns('',
-    url(r'^$', rideshare.views.home), 
+    url(r'^index/$', rideshare.views.home), 
     url(r'^rides/$', rideshare.views.all_rides), 
     url(r'^rides/remove/([0-9]+)/$', rideshare.views.remove_from_ride), 
     url(r'^rides/add/([0-9]+)/$', rideshare.views.add_to_ride), 
