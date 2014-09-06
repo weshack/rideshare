@@ -7,6 +7,7 @@
 
     <!-- Stylesheet -->
     <link rel="stylesheet" href="/static/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
     <link rel="stylesheet" href="/static/css/index.css" />
     <link rel="stylesheet" href="/static/css/bootstrap-responsive.min.css" />
     <link href='http://fonts.googleapis.com/css?family=Exo:500' rel='stylesheet' type='text/css'>
@@ -138,7 +139,8 @@
       <div>
         <a href="#" class="btn btn-primary">Submit</a>
       </div>
-        </div>
+    </div>
+          
     </div>
     <!-- SIGN IN END-->
 
@@ -214,8 +216,10 @@
                 <option value="WY">WY</option>
             </select>
         <br>
-        <p>Leaving at 
+        <p>Leaving between
             <input type="time" id="time" name="departTime" value="12:00" />
+            and
+            <input type="time" id="time" name="departTime" value="14:00" />
             on 
             <input type="text" id="datepicker" name="departDate" />
         </p>
@@ -227,24 +231,53 @@
           
 
     <div id="suggestions" class="otherpages loadSearch">
-        <div id="accordion">
-        <h3>Results</h3>
-        <div id="results">
-          <ul id='searchresults'>
-                    <p>No results found</p>
-          </ul>
-        </div>
+
+    <div class="panel-group" id="accordion">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+        <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+          Results
+        </a>
+      </h4>
+    </div>
+    <div id="collapseOne" class="panel-collapse collapse in">
+      <div class="panel-body">
+        <li id="searchresults"></li>
+      </div>
+    </div>
+  </div>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+        <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
+          Create New Ride
+        </a>
+      </h4>
+    </div>
+    <div id="collapseTwo" class="panel-collapse collapse">
+      <div class="panel-body">
+        New ride put in here
+      </div>
+    </div>
+  </div>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+        <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
+          My Rides
+        </a>
+      </h4>
+    </div>
+    <div id="collapseThree" class="panel-collapse collapse">
+      <div class="panel-body">
+        rides rides rides
+      </div>
+    </div>
+  </div>
+</div>
         
-        <h3>Create a New Ride</h3>
-        <div id="createNew">
-            <p>Create a new ride for [existing search]</p>
-        </div>
         
-        <h3>View My Rides</h3>
-        <div id="myrides">
-        </div>
-        
-        </div>
         
         <button id="searchAgain">Search Again!</button>
         
@@ -441,9 +474,6 @@
         $("#datepicker").datepicker();
       });
 
-      $(function() {
-        $( "#accordion" ).accordion();
-      });
     </script>
   </body>
 </html>
