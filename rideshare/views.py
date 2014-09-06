@@ -134,7 +134,7 @@ def forgot_password(request):
              "</head>\r\n"
              "<body style='background: #ECF0F1; font-size: 12px;'>\r\n"
              "<div style='width: 60%; min-width: 400px; max-width: 800px; margin-left: auto; margin-right: auto; color: gray; margin-top: 40px;'>\r\n"
-    html_message += html_content + html_foot
+    html_message += html_content + "</div>\r\n</body>\r\n</html>\r\n"
     message="To recover your account please follow the link to http://rideatwes.weshack.com/recover/" + new_token.auth_code
     message+="\nIf you did not request account recovery you can safely ignore this message."
     message+="\nThanks,"+"\n"+"The Ride@Wes Team."
