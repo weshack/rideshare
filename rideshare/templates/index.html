@@ -395,17 +395,35 @@
         var start_city = "Middletown"
         var end_state = "CT"
         var end_city = "Middletown"
-        var address = ""
+        var start_address = "45 Wyllys"
+        var end_address = "45 Wyllys"
         if ($("#direction").val() == "toWes") {
           start_state = $("#state").val();
           start_city = $("#city").val();
+          start_address = $("#address").val();
         } else {
           end_state = $("#state").val();
           end_city = $("#city").val();
-        ]
+          end_address = $("#address").val();
+        }
 
-        $.post("/rides/create/")
-      })
+        var address = $("#address").val();
+
+        $.post("/rides/create/",
+        { 'start_state' : start_state,
+          'start_city' : start_city,
+          'end_state' : end_state,
+          'end_city' : end_city,
+          'start_address' : start_address,
+          'end_address' : end_address,
+        }).always(function(r) {
+          console.log(r);
+           var resp = eval("(" + r.responseText + ")")
+           if (resp.response) {
+           console.log(resp.response);
+         }
+        })
+      });
 
       $(function() {
         $("#datepicker").datepicker();

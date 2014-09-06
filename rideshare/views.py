@@ -6,7 +6,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.core.mail import send_mail, EmailMultiAlternatives
 from django.http import HttpResponse, Http404, HttpResponseForbidden
 from rideshare.forms import RegistrationForm
-from rideshare.models import User, AuthToken, Ride
+from rideshare.models import User, AuthToken, Ride, Location, State
 from django.db.models import Q
 import json
 
@@ -76,8 +76,8 @@ def add_to_ride(request, rId):
 @require_POST
 def create_ride(request):
     if not request.user.verified: return HttpResponse("{ 'response': 'You must verify your account to create a ride.' }", content_type='application/json')
-    start = Location.objects.create(state=request.POST['start_state'],city=request.POST['start_city'],address=request.POST['start_address'])
-    end = Location.objects.create(state=request.POST['end_state'],city=request.POST['end_city'],address=request.POST['end_address'])
+    start = Location.objects.create(state=State.objects.get(name=request.POST['start_state']),city=request.POST['start_city'],address=request.POST['start_address'])
+    end = Location.objects.create(state=State.objects.get(name=request.POST['end_state']),city=request.POST['end_city'],address=request.POST['end_address'])
     ride = Ride.objects.create(owner=request.user,start=start,end=end)
     ride.save()
     if request.POST.get('driver',False):
