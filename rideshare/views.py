@@ -107,6 +107,11 @@ def logout(request):
     auth.logout(request)
     return HttpResponse("{'response':'ok'}",content_type='application/json')
 
+def user_info(request):
+    if user.is_authenticated():
+        return HttpResponse(json.dumps(request.user), content_type='application/json')
+    return HttpResponse("{'response': 'Not logged in.'}",content_type='application/json')
+
 @require_POST
 def forgot_password(request):
     try:
