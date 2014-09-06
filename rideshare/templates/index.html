@@ -25,7 +25,7 @@
             <ul class="nav">
               <li><a href="#forgotbox" data-toggle="modal"><i class="icon-user icon-white"></i>Forgot Password</a  ></li>
               <li class="divider-vertical"></li>
-              <li><a href="#contact" data-toggle="modal"><i class="icon-envelope icon-white"></i>Contact Us</a  ></li>
+              <li><a href="#contactbox" data-toggle="modal"><i class="icon-envelope icon-white"></i>Contact Us</a  ></li>
               <li class="divider-vertical"></li>
             </ul>
           </div>
@@ -85,16 +85,12 @@
             
         </div>
       </section>
-<<<<<<< HEAD
-
-=======
->>>>>>> 7637d7565d1dd6e8f18b665714be139fef674cce
   
     <!-- Forgot Password Box -->
     <div id="forgotbox" class="modal hide fade in" style="display: none; ">
-    <div id='forgoterror' class="alert alert-box" style="display: none; ">
-      <button type="button" class="close" data-dismiss="alert">&times;</button>
-    </div>
+      <div id='forgoterror' class="alert alert-box" style="display: none; ">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+      </div>
       <div class="modal-header">
         <a class="close" data-dismiss="modal">×</a>
         <h3>Forgot Password</h3>
@@ -177,7 +173,7 @@
           }).always(function(r) {
             var resp = eval("(" + r.responseText + ")")
             if (resp.response != 'ok') {
-              $("#forgoterror").text(resp.response);
+              $("#forgoterror").text(resp.response).show();
             }
           })
        });
