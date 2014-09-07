@@ -36,6 +36,9 @@ class User(AbstractBaseUser):
         ja = AuthToken(user=self, auth_code=''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(20)))
         ja.save()
         return ja
+    def to_dict(self):
+        return { 'name': self.name, 'phone_number': self.phone_number, 'email': self.email,
+            'verified': self.verified, 'id': self.id, 'class_year': self.class_year }
 
 class Ride(models.Model):
     owner = models.ForeignKey(User, related_name='rides_created')

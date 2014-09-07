@@ -8,18 +8,27 @@ from django.http import HttpResponse, Http404, HttpResponseForbidden
 from rideshare.forms import RegistrationForm
 from rideshare.models import User, AuthToken, Ride, Location, State
 from django.db.models import Q
+from django.forms.models import model_to_dict
+from django.utils.timezone import utc
 import json
+import datetime
 
 def home(request):
    return render(request,'index.html')
 
 @login_required
 def all_rides(request):
-    return HttpResponse(json.dumps(Ride.objects.all()), content_type='application/json')
+    rides = []
+    for ride in Ride.objects.all():
+        rides.append(model_to_dict(ride))
+    return HttpResponse(json.dumps(rides), content_type='application/json')
 
 @login_required
 def my_rides(request):
-    return HttpResponse(json.dumps(Ride.objects.filter(Q(driver=request.user) | Q(passengers__in=[request.user]) | Q(owner=request.user))), content_type='application/json')
+    rides = []
+    for ride in Ride.objects.filter(Q(driver=request.user) | Q(passengers__in=[request.user]) | Q(owner=request.user)):
+        rides.append(model_to_dict(ride))
+    return HttpResponse(json.dumps(rides), content_type='application/json')
 
 @login_required
 @require_POST
@@ -48,7 +57,7 @@ def cmp(city, to_wes, time):
 
 def search(request):
     driver = request.GET.get('driver',False)
-    time = request.GET.get('time')
+    time = datetime.datetime.strptime(request.GET.get('time'), '%Y-%m-%d %H:%M').replace(tzinfo=utc)
     state = request.GET.get('state')
     city = request.GET.get('city')
     to_wes = request.GET.get('to_wes')
@@ -60,8 +69,13 @@ def search(request):
     else: query = query.filter(end__state__name=state)
     
     query = sorted(query,key=cmp(city,to_wes,time))
-    
-    return HttpResponse(json.dumps(query), content_type='application/json')
+    rides = []
+    for ride in query:
+        rideDict = model_to_dict(ride)
+        rideDict['leave_time_start'] = str(rideDict['leave_time_start'])
+        rideDict['leave_time_end'] = str(rideDict['leave_time_end'])
+        rides.append(rideDict)
+    return HttpResponse(json.dumps(rides), content_type='application/json')
 
 @login_required
 @require_POST
@@ -74,7 +88,10 @@ def add_to_ride(request, rId):
     elif not request.POST.get('driver',False) and ride.passengers.count() < ride.max_passengers:
         ride.passengers.add(request.user)
     ride.save()
-    return HttpResponse(json.dumps(ride),content_type='application/json')
+    rd = model_to_dict(ride)
+    rd['leave_time_start'] = str(rd['leave_time_start'])
+    rd['leave_time_end'] = str(rd['leave_time_end'])
+    return HttpResponse(json.dumps(rd),content_type='application/json')
 
 @login_required
 @require_POST
@@ -82,17 +99,18 @@ def create_ride(request):
     if not request.user.verified: return HttpResponse("{ 'response': 'You must verify your account to create a ride.' }", content_type='application/json')
     start = Location.objects.create(state=State.objects.get(name=request.POST['start_state']),city=request.POST['start_city'],address=request.POST['start_address'])
     end = Location.objects.create(state=State.objects.get(name=request.POST['end_state']),city=request.POST['end_city'],address=request.POST['end_address'])
-    ride = Ride.objects.create(owner=request.user,start=start,end=end)
+    ride = Ride.objects.create(owner=request.user,start=start,end=end,leave_time_start=request.POST['leave_time_start'],leave_time_end=request.POST['leave_time_end'])
     ride.save()
     if request.POST.get('driver',False):
        ride.driver = request.user
        ride.max_passengers = request.POST.get('max_passengers',1)
     else:
        ride.passengers.add(request.user)
-    ride.leave_time_start = request.POST['leave_time_start']
-    ride.leave_time_end = request.POST['leave_time_end']
     ride.save()
-    return HttpResponse(json.dumps(ride),content_type='application/json')
+    rd = model_to_dict(ride)
+    rd['leave_time_start'] = str(rd['leave_time_start'])
+    rd['leave_time_end'] = str(rd['leave_time_end'])
+    return HttpResponse(json.dumps(rd),content_type='application/json')
 
 def authenticate(request):
     username = request.POST.get('username', '')
@@ -113,9 +131,15 @@ def logout(request):
 
 def user_info(request):
     if request.user.is_authenticated():
-        user = { 'name': request.user.name, 'phone_number': request.user.phone_number, 'email': request.user.email, 'verified': request.user.verified, 'class_year': request.user.class_year }
-        return HttpResponse(json.dumps(user), content_type='application/json')
+        return HttpResponse(json.dumps(request.user.to_dict()), content_type='application/json')
     return HttpResponse("{'response': 'Not logged in.'}",content_type='application/json')
+
+@login_required
+def get_info_user(request, uId):
+    return HttpResponse(json.dumps(model_to_dict(User.objects.get(id=uId))),content_type='application/json')
+
+def get_location(request, lId):
+    return HttpResponse(json.dumps(Location.objects.get(id=lId)),content_type='application/json')
 
 @require_POST
 def forgot_password(request):
