@@ -429,6 +429,7 @@
       });
 
       $("#createRide").click(function() {
+        var driver = "False"
         var start_state = "CT"
         var start_city = "Middletown"
         var end_state = "CT"
@@ -444,6 +445,9 @@
           end_city = $("#city").val();
           end_address = $("#address").val();
         }
+        if ($("#driver").val() == driver) {
+          driver = "True"
+        }
 
         var address = $("#address").val();
         var date = $("#datepicker").datepicker("getDate");
@@ -451,9 +455,9 @@
         var time1 = dateString + " " + $("#time1").val();
         var time2 = dateString + " " + $("#time2").val();
 
-
         $.post("/rides/create/",
-        { 'start_state' : start_state,
+        { 'driver' : driver,
+          'start_state' : start_state,
           'start_city' : start_city,
           'end_state' : end_state,
           'end_city' : end_city,
@@ -462,9 +466,7 @@
           'leave_time_start' : time1,
           'leave_time_end' : time2,
         }).always(function(r) {
-          if (r.response) {
-           console.log(r.response);
-         }
+           console.log(r);
         })
       });
         
