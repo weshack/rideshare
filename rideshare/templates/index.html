@@ -29,6 +29,20 @@
           
       <div id="content">
       
+    <!-- Verify Box     <div id="verifybox" class="modal fade in" style="display: none;" >
+      <div class="modal-header">
+        <a class="close" data-dismiss="modal">×</a>
+        <h3>Verification</h3>
+      </div>
+      <div class="modal-body">
+      <p>You must verify your account through your e-mail before creating or joining rides.</p>
+      </div>
+      <div>
+        <a id="verify" data-dismiss="modal" class="btn btn-primary">OK</a>
+      </div>
+    </div>-->
+
+
       <div id="signin" class="loadSearch">
   
       <!-- Main Container -->
@@ -93,7 +107,7 @@
                 <input id="addclassyear" type="text" value="" class="span4" placeholder="Class Year" />
   
                 <div>
-                  <button id="create" class="btn btn-primary">Create Account</button>
+                  <button id="create" class="btn btn-primary" >Create Account</button>
                 </div>
             </div>
             </div>
@@ -105,7 +119,7 @@
     <!-- Main Container End -->
 
     <!-- Forgot Password Box -->
-    <div id="forgotbox" class="modal hide fade in" style="display: none; ">
+    <div id="forgotbox" class="modal fade in" style="display: none; ">
       <div id="forgoterror" class="alert alert-box" style="display: none; ">
         <button type="button" class="close" data-dismiss="alert">&times;</button>
       </div>
@@ -125,7 +139,7 @@
     </div>
 
     <!-- Contact Us Box -->
-    <div id="contactbox" class="modal hide fade in" style="display: none; ">
+    <div id="contactbox" class="modal fade in" style="display: none; ">
       <div class="modal-header">
         <a class="close" data-dismiss="modal">×</a>
         <h3>Contact Us</h3>
@@ -146,14 +160,12 @@
         <a href="#" class="btn btn-primary">Submit</a>
       </div>
     </div>
-          
+
     </div>
     <!-- SIGN IN END-->
 
-
-          
     <div id="search" class="otherpages">
-          I am a 
+          I am a
           <select id='isDriver'>
             <option value='driver'>Driver</option>
             <option value='passenger'>Passenger</option>
@@ -549,6 +561,8 @@
       $("#searchAgain").click(function() {
           $("#suggestions").hide();
           $("#search").show();
+          $("#beforeCreate").show();
+          $("#afterCreate").hide();
       });
 
       $(function() {
