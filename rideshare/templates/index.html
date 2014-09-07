@@ -456,7 +456,13 @@
         $.getJSON("/search/?to_wes=" + window.direction +"&driver=" + window.driver + "&city=" + $("#city").val() +"&state=" + $("#state").val() + "&time=" + time).always(function(r) {
           console.log(r);
           for (var i = 0; i<r.length;i++){
-            $("#searchresults").append("<li>Ride from " + r[i].start + " to " + r[i].end + " at " + r[i].time + " with " + (r[i].max_passengers - r[i].passengers.length) + " free seats.</li>");
+            (function(i){
+              $.getJSON("/locations/" + r[i].start, function(start) {
+                $.getJSON("/locations/" + r[i].end, function(end) {
+                  $("#searchresults").append("<li>Ride from " + start.address + ", " + start.city + ", " + start.state + " to " + end.address + ', ' + end.city + ', ' + end.state + " at " + r[i].leave_time_start + " - " + r[i].leave_time_end + " with " + (r[i].max_passengers - r[i].passengers.length) + " free seats.</li>");
+                });
+              });
+            })(i);
           }
         });
         
