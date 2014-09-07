@@ -1,0 +1,150 @@
+- model: rideshare.Location
+fields: 
+  name: "AL"
+- model: rideshare.Location
+fields: 
+  name: "AK"
+- model: rideshare.Location
+fields: 
+  name: "AZ"
+- model: rideshare.Location
+fields: 
+  name: "AR"
+- model: rideshare.Location
+fields: 
+  name: "CA"
+- model: rideshare.Location
+fields: 
+  name: "CO"
+- model: rideshare.Location
+fields: 
+  name: "CT"
+- model: rideshare.Location
+fields: 
+  name: "DE"
+- model: rideshare.Location
+fields: 
+  name: "DC"
+- model: rideshare.Location
+fields: 
+  name: "FL"
+- model: rideshare.Location
+fields: 
+  name: "GA"
+- model: rideshare.Location
+fields: 
+  name: "HI"
+- model: rideshare.Location
+fields: 
+  name: "ID"
+- model: rideshare.Location
+fields: 
+  name: "IL"
+- model: rideshare.Location
+fields: 
+  name: "IN"
+- model: rideshare.Location
+fields: 
+  name: "IA"
+- model: rideshare.Location
+fields: 
+  name: "KS"
+- model: rideshare.Location
+fields: 
+  name: "KY"
+- model: rideshare.Location
+fields: 
+  name: "LA"
+- model: rideshare.Location
+fields: 
+  name: "ME"
+- model: rideshare.Location
+fields: 
+  name: "MD"
+- model: rideshare.Location
+fields: 
+  name: "MA"
+- model: rideshare.Location
+fields: 
+  name: "MI"
+- model: rideshare.Location
+fields: 
+  name: "MN"
+- model: rideshare.Location
+fields: 
+  name: "MS"
+- model: rideshare.Location
+fields: 
+  name: "MO"
+- model: rideshare.Location
+fields: 
+  name: "MT"
+- model: rideshare.Location
+fields: 
+  name: "NE"
+- model: rideshare.Location
+fields: 
+  name: "NV"
+- model: rideshare.Location
+fields: 
+  name: "NH"
+- model: rideshare.Location
+fields: 
+  name: "NJ"
+- model: rideshare.Location
+fields: 
+  name: "NM"
+- model: rideshare.Location
+fields: 
+  name: "NY"
+- model: rideshare.Location
+fields: 
+  name: "NC"
+- model: rideshare.Location
+fields: 
+  name: "ND"
+- model: rideshare.Location
+fields: 
+  name: "OH"
+- model: rideshare.Location
+fields: 
+  name: "OK"
+- model: rideshare.Location
+fields: 
+  name: "OR"
+- model: rideshare.Location
+fields: 
+  name: "PA"
+- model: rideshare.Location
+fields: 
+  name: "RI"
+- model: rideshare.Location
+fields: 
+  name: "SC"
+- model: rideshare.Location
+fields: 
+  name: "SD"
+- model: rideshare.Location
+fields: 
+  name: "TN"
+- model: rideshare.Location
+fields: 
+  name: "TX"
+- model: rideshare.Location
+fields: 
+  name: "UT"
+- model: rideshare.Location
+fields: 
+  name: "VT"
+- model: rideshare.Location
+fields: 
+  name: "VA"
+- model: rideshare.Location
+fields: 
+  name: "WA"
+- model: rideshare.Location
+fields: 
+  name: "WV"
+- model: rideshare.Location
+fields: 
+  name: "WI"
