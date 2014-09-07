@@ -256,7 +256,13 @@
     </div>
     <div id="collapseTwo" class="panel-collapse collapse">
       <div class="panel-body">
-        New ride put in here
+        <div id="beforeCreate">
+          <p>Can't find a ride that you want? Create a new ride!</p>
+          <button type="submit" id="createRideAfter" name="createRideAfter" >Create a new Ride</button>
+        </div>
+        <div id="afterCreate" style="display: none;" >
+          <p>Your ride has been created! You will receive e-mails as people sign up for your ride.</p>
+        </div>
       </div>
     </div>
   </div>
@@ -403,21 +409,27 @@
          }});
         
       $("#searchRides").click(function() {
-        var driver = "True";
-        var direction = "True";
+        window.driver = "True";
+        window.direction = "True";
+        window.time1 = $("#time1").val();
+        window.time2 = $("#time2").val();
+        window.address = $("#address").val();
+        window.state = $("#state").val();
+        window.city = $("#city").val();
+        window.address = $("#address").val();
         var date = $("#datepicker").datepicker( "getDate" );
         var dateString = date.getFullYear() + "-" + String("00" + date.getMonth()).slice(-2) + "-" + String("00" + date.getDate()).slice(-2);
-        var time = dateString + " " + $("#time1").val();
+        time = dateString + " " + $("#time1").val();
 
         if ($("#isDriver").val() != "driver") {
-          driver = "False";
+          window.driver = "False";
         }
 
         if ($("#direction").val() != "toWes") {
-          direction = "False";
+          window.direction = "False";
         }
 
-        $.getJSON("/search/?to_wes=" + direction +"&driver=" + driver + "&city=" + $("#city").val() +"&state=" + $("#state").val() + "&time=" + time).always(function(r) {
+        $.getJSON("/search/?to_wes=" + window.direction +"&driver=" + window.driver + "&city=" + $("#city").val() +"&state=" + $("#state").val() + "&time=" + time).always(function(r) {
           console.log(r);
           for (var i = 0; i<r.length;i++){
             $("#searchresults").append("<li>Ride from " + r[i].start + " to " + r[i].end + " at " + r[i].time + " with " + (r[i].max_passengers - r[i].passengers.length) + " free seats.</li>");
@@ -427,6 +439,51 @@
         $("#search").hide();
         $("#suggestions").show();
       });
+
+      $("#createRideAfter").click(function() {
+        var start_state = "CT";
+        var start_city = "Middletown";
+        var end_state = "CT";
+        var end_city = "Middletown";
+        var start_address = "45 Wyllys";
+        var end_address = "45 Wyllys";
+
+        if (window.direction == "toWes") {
+          start_state = window.state;
+          start_city = window.city;
+          start_address = window.address;
+        } else {
+          end_state = window.state;
+          end_city = window.city;
+          end_address = window.address;
+        }
+        if (window.driver == "driver") {
+          driver = "True"
+        }
+
+        var address = $("#address").val();
+        var date = $("#datepicker").datepicker("getDate");
+        var dateString = date.getFullYear() + "-" + String("00" + date.getMonth()).slice(-2) + "-" + String("00"+date.getDate()).slice(-2);
+        var time1 = dateString + " " + window.time1;
+        var time2 = dateString + " " + window.time2;
+
+        $.post("/rides/create/",
+        { 'driver' : window.driver,
+          'start_state' : start_state,
+          'start_city' : start_city,
+          'end_state' : end_state,
+          'end_city' : end_city,
+          'start_address' : start_address,
+          'end_address' : end_address,
+          'leave_time_start' : time1,
+          'leave_time_end' : time2,
+        }).always(function(r) {
+           console.log(r);
+        })
+        $("#beforeCreate").hide();
+        $("#afterCreate").show();
+      });
+        
 
       $("#createRide").click(function() {
         var driver = "False"
@@ -445,7 +502,7 @@
           end_city = $("#city").val();
           end_address = $("#address").val();
         }
-        if ($("#driver").val() == driver) {
+        if ($("#isDriver").val() == driver) {
           driver = "True"
         }
 
