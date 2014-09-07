@@ -148,9 +148,14 @@
     <div id="search" class="otherpages">
           I am a
           <select id='isDriver'>
-            <option value='driver'>Driver</option>
             <option value='passenger'>Passenger</option>
+            <option value='driver'>Driver</option>
           </select>
+        
+          <div id="carsize">
+              With <input type="number" name="numPassengers" min="1" max="6"> passengers
+          </div>
+        
           <p>Driving 
 
             <select id='direction'>
@@ -158,9 +163,9 @@
               <option value='toWes'>to Wesleyan from</option>
             </select>
           </p>
-        
-          <input type="text" id="address" name="address" value="46 Wyllys Ave." />
-          <input type="text" id="city" name="city" placeholder="Middletown" value="Middletown" required />
+
+          <input type="text" id="address" name="address" placeholder="Address" value="46 Wyllys Ave." />
+          <input type="text" id="city" name="city" placeholder="City" value="Middletown" required />
             <select id="state" name="state" class="form-control" >
                 <option value="AL">AL</option>
                 <option value="AK">AK</option>
@@ -468,6 +473,14 @@
         })
       });
         
+      $("#isDriver").change(function() {
+          if ($("#isDriver").val()=="driver") {
+              $("#carsize").show();
+          } else {
+              $("#carsize").hide();
+          };
+      });
+          
       $("#searchAgain").click(function() {
           $("#suggestions").hide();
           $("#search").show();
