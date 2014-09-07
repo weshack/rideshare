@@ -72,8 +72,8 @@ def search(request):
     rides = []
     for ride in query:
         rideDict = model_to_dict(ride)
-        rideDict['leave_time_start'] = str(rideDict['leave_time_start'])
-        rideDict['leave_time_end'] = str(rideDict['leave_time_end'])
+        rideDict['leave_time_start'] = rideDict['leave_time_start'].strftime('%m/%d at %H:%M')
+        rideDict['leave_time_end'] = rideDict['leave_time_end'].strftime('%m/%d at %H:%M')
         rides.append(rideDict)
     return HttpResponse(json.dumps(rides), content_type='application/json')
 
@@ -139,7 +139,9 @@ def get_info_user(request, uId):
     return HttpResponse(json.dumps(model_to_dict(User.objects.get(id=uId))),content_type='application/json')
 
 def get_location(request, lId):
-    return HttpResponse(json.dumps(Location.objects.get(id=lId)),content_type='application/json')
+    l = model_to_dict(Location.objects.get(id=lId))
+    l['state'] = State.objects.get(id=l['state']).name
+    return HttpResponse(json.dumps(l),content_type='application/json')
 
 @require_POST
 def forgot_password(request):
