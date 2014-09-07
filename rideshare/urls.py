@@ -17,5 +17,7 @@ urlpatterns = patterns('',
     url(r'^users/add/$', rideshare.views.create_user), 
     url(r'^users/modify/$', rideshare.views.modify_user), 
     url(r'^users/info/$', rideshare.views.user_info), 
-    url(r'^search/$', rideshare.views.search), 
+    url(r'^search/$', rideshare.views.search),
+    url(r'^users/info/([0-9]+)/$', rideshare.views.get_info_user),
+    url(r'^locations/([0-9]+)/$', rideshare.views.get_location),
 )

@@ -216,9 +216,9 @@
             </select>
         <br>
         <p>Leaving between
-            <input type="time" id="time" name="departTime" value="12:00" />
+            <input type="time" id="time1" name="time1" value="12:00" />
             and
-            <input type="time" id="time" name="departTime" value="14:00" />
+            <input type="time" id="time2" name="time2" value="14:00" />
             on 
             <input type="text" id="datepicker" name="departDate" />
         </p>
@@ -394,7 +394,6 @@
           }
         })
        });
-
       $("#datepicker").val((new Date()).toLocaleDateString());
 
       $.getJSON("/users/info",function(r){
@@ -406,7 +405,9 @@
       $("#searchRides").click(function() {
         var driver = "True";
         var direction = "True";
-        var time = ($("#datepicker").datepicker( "getDate" ).toLocaleDateString()) + $("#time").val();
+        var date = $("#datepicker").datepicker( "getDate" );
+        var dateString = date.getFullYear() + "-" + String("00" + date.getMonth()).slice(-2) + "-" + String("00" + date.getDate()).slice(-2);
+        var time = dateString + " " + $("#time1").val();
 
         if ($("#isDriver").val() != "driver") {
           driver = "False";
@@ -419,7 +420,7 @@
         $.getJSON("/search/?to_wes=" + direction +"&driver=" + driver + "&city=" + $("#city").val() +"&state=" + $("#state").val() + "&time=" + time).always(function(r) {
           console.log(r);
           for (var i = 0; i<r.length;i++){
-            $("#searchresults").appendChild("<li>Ride from " + r[i].start + " to " + r[i].end + " at " + r[i].time + " with " + (r[i].max_passengers - r[i].passengers.length) + " free seats.</li>");
+            $("#searchresults").append("<li>Ride from " + r[i].start + " to " + r[i].end + " at " + r[i].time + " with " + (r[i].max_passengers - r[i].passengers.length) + " free seats.</li>");
           }
         });
         
@@ -445,6 +446,11 @@
         }
 
         var address = $("#address").val();
+        var date = $("#datepicker").datepicker("getDate");
+        var dateString = date.getFullYear() + "-" + String("00" + date.getMonth()).slice(-2) + "-" + String("00"+date.getDate()).slice(-2);
+        var time1 = dateString + " " + $("#time1").val();
+        var time2 = dateString + " " + $("#time2").val();
+
 
         $.post("/rides/create/",
         { 'start_state' : start_state,
@@ -453,15 +459,13 @@
           'end_city' : end_city,
           'start_address' : start_address,
           'end_address' : end_address,
+          'leave_time_start' : time1,
+          'leave_time_end' : time2,
         }).always(function(r) {
-          console.log(r);
-           var resp = eval("(" + r.responseText + ")")
-           if (resp.response) {
-           console.log(resp.response);
+          if (r.response) {
+           console.log(r.response);
          }
         })
-
-        $.post("/rides/create/")
       });
         
       $("#searchAgain").click(function() {
