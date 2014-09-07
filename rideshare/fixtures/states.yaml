@@ -1,0 +1,150 @@
+- model: rideshare.State
+  fields: 
+    name: "AL"
+- model: rideshare.State
+  fields: 
+    name: "AK"
+- model: rideshare.State
+  fields: 
+    name: "AZ"
+- model: rideshare.State
+  fields: 
+    name: "AR"
+- model: rideshare.State
+  fields: 
+    name: "CA"
+- model: rideshare.State
+  fields: 
+    name: "CO"
+- model: rideshare.State
+  fields: 
+    name: "CT"
+- model: rideshare.State
+  fields: 
+    name: "DE"
+- model: rideshare.State
+  fields: 
+    name: "DC"
+- model: rideshare.State
+  fields: 
+    name: "FL"
+- model: rideshare.State
+  fields: 
+    name: "GA"
+- model: rideshare.State
+  fields: 
+    name: "HI"
+- model: rideshare.State
+  fields: 
+    name: "ID"
+- model: rideshare.State
+  fields: 
+    name: "IL"
+- model: rideshare.State
+  fields: 
+    name: "IN"
+- model: rideshare.State
+  fields: 
+    name: "IA"
+- model: rideshare.State
+  fields: 
+    name: "KS"
+- model: rideshare.State
+  fields: 
+    name: "KY"
+- model: rideshare.State
+  fields: 
+    name: "LA"
+- model: rideshare.State
+  fields: 
+    name: "ME"
+- model: rideshare.State
+  fields: 
+    name: "MD"
+- model: rideshare.State
+  fields: 
+    name: "MA"
+- model: rideshare.State
+  fields: 
+    name: "MI"
+- model: rideshare.State
+  fields: 
+    name: "MN"
+- model: rideshare.State
+  fields: 
+    name: "MS"
+- model: rideshare.State
+  fields: 
+    name: "MO"
+- model: rideshare.State
+  fields: 
+    name: "MT"
+- model: rideshare.State
+  fields: 
+    name: "NE"
+- model: rideshare.State
+  fields: 
+    name: "NV"
+- model: rideshare.State
+  fields: 
+    name: "NH"
+- model: rideshare.State
+  fields: 
+    name: "NJ"
+- model: rideshare.State
+  fields: 
+    name: "NM"
+- model: rideshare.State
+  fields: 
+    name: "NY"
+- model: rideshare.State
+  fields: 
+    name: "NC"
+- model: rideshare.State
+  fields: 
+    name: "ND"
+- model: rideshare.State
+  fields: 
+    name: "OH"
+- model: rideshare.State
+  fields: 
+    name: "OK"
+- model: rideshare.State
+  fields: 
+    name: "OR"
+- model: rideshare.State
+  fields: 
+    name: "PA"
+- model: rideshare.State
+  fields: 
+    name: "RI"
+- model: rideshare.State
+  fields: 
+    name: "SC"
+- model: rideshare.State
+  fields: 
+    name: "SD"
+- model: rideshare.State
+  fields: 
+    name: "TN"
+- model: rideshare.State
+  fields: 
+    name: "TX"
+- model: rideshare.State
+  fields: 
+    name: "UT"
+- model: rideshare.State
+  fields: 
+    name: "VT"
+- model: rideshare.State
+  fields: 
+    name: "VA"
+- model: rideshare.State
+  fields: 
+    name: "WA"
+- model: rideshare.State
+  fields: 
+    name: "WV"
+- model: rideshare.State
+  fields: 
+    name: "WI"
