@@ -85,3 +85,6 @@ html, body {
 #accordion div.panel {
     margin-bottom: 0px;
 }
+#state {
+    width: 60px;
+}
