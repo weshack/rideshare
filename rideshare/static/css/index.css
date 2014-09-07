@@ -87,4 +87,5 @@ html, body {
 }
 #state {
     width: 60px;
+    display: inline;
 }
