@@ -14,6 +14,7 @@ html, body {
     padding: 0;
     background-image: url("../img/ct_map.jpg");
     background-size: cover;
+    font-family: "Railway";
 }
 #wrap {
     min-height: 100%;
@@ -26,7 +27,6 @@ html, body {
     width: 100%;
     margin-bottom: 5px;
     padding-top: 15px;
-/*    background-color: rgba(219, 218, 218, 0.41);*/
     z-index: 1000;
 }
 #titlePlate {
@@ -132,4 +132,14 @@ html, body {
 .timefields {
     height: 30px;
     width: 60px;
+}
+
+#searchresults {
+    list-style: none;
+}
+#searchresults > li {
+    height: 110px;
+    width: 450px;
+    margin: 5px;
+    background: #c4bebe;
 }

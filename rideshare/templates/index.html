@@ -266,7 +266,7 @@
     </div>
     <div id="collapseOne" class="panel-collapse collapse in">
       <div class="panel-body">
-        <li id="searchresults"></li>
+        <ul id="searchresults"></ul>
       </div>
     </div>
   </div>
@@ -319,7 +319,7 @@
         <p id="tagline">THIS IS <img src="../static/img/y-sign.png" id="ysign"></p>
         <p class="text-center">Created by Ted Kim, Max Dietz, Matthew Stein at WesHack 2014. </p>
     </div>
-          
+
     </div> <!-- end wrap -->
           
 
@@ -459,12 +459,14 @@
             (function(i){
               $.getJSON("/locations/" + r[i].start, function(start) {
                 $.getJSON("/locations/" + r[i].end, function(end) {
-                  $("#searchresults").append("<li>Ride from " + start.address + ", " + start.city + ", " + start.state + " to " + end.address + ', ' + end.city + ', ' + end.state + " at " + r[i].leave_time_start + " - " + r[i].leave_time_end + " with " + (r[i].max_passengers - r[i].passengers.length) + " free seats.</li>");
+                  $("#searchresults").append("<li><p>From: " + start.address + ", " + start.city + ", " + start.state + "</p><p>To: " + end.address + ', ' + end.city + ', ' + end.state + "</p><p>Time:" + r[i].leave_time_start + " - " + r[i].leave_time_end + "</p>Free seats:" + (r[i].max_passengers - r[i].passengers.length) + " free seats.</p></li>");
                 });
               });
             })(i);
           }
         });
+          
+//          "<li>Ride from " + start.address + ", " + start.city + ", " + start.state + " to " + end.address + ', ' + end.city + ', ' + end.state + " at " + r[i].leave_time_start + " - " + r[i].leave_time_end + " with " + (r[i].max_passengers - r[i].passengers.length) + " free seats.</li>"
         
         $("#search").hide();
         $("#suggestions").show();
